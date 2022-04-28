@@ -9,17 +9,34 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       quantity: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DATE
       },
-      updatedAt: {
+      sale_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+        references: { model: 'Sales', key: 'id  ' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        primaryKey: true,
+      },
+      product_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { mode: 'Products', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        primaryKey: true,
+      },
+      // createdAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // },
+      // updatedAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // }
+    }, { timestamps: false });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('salesProducts');

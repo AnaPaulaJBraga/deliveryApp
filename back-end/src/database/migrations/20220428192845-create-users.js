@@ -9,18 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING, allowNull: false
       },
-      
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      email: {
+        type: Sequelize.STRING, allowNull: false
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+      password: {
+        type: Sequelize.STRING, allowNull: false
+      },
+      role: {
+        type: Sequelize.STRING, allowNull: false
+      },
+    }, { timestamps: false } );
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('users');
