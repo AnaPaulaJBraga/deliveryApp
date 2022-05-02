@@ -1,0 +1,15 @@
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 25vh;
+}
+
+form {
+  background-color: rgb(181, 187, 196);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
