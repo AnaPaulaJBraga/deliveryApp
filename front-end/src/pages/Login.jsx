@@ -27,7 +27,7 @@ function Login() {
     event.preventDefault();
     const response = await api.post('login', { email, password });
     navigate('/products');
-    setUser(response.data);
+    // setUser(response.data);
     console.log(response.data);
   }
 
