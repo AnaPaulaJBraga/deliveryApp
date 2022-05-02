@@ -32,11 +32,10 @@ function Login() {
   }
 
   return (
-    <>
+    <div>
       <h1>Delivery App</h1>
       <form onSubmit={ handleSubmit }>
         <label htmlFor="email">
-          Email
           <input
             data-testid="common_login__input-email"
             type="email"
@@ -44,10 +43,10 @@ function Login() {
             name="email"
             value={ email }
             onChange={ handleChange }
+            placeholder="Digite seu email"
           />
         </label>
         <label htmlFor="password">
-          Password
           <input
             data-testid="common_login__input-password"
             type="password"
@@ -55,6 +54,7 @@ function Login() {
             name="password"
             value={ password }
             onChange={ handleChange }
+            placeholder="Digite sua senha"
           />
         </label>
         <button type="submit" data-testid="common_login__button-login">Login</button>
@@ -67,7 +67,7 @@ function Login() {
           </button>
         </Link>
       </form>
-    </>
+    </div>
   );
 }
 
