@@ -11,7 +11,8 @@ app.use(express.json());
 
 app.use(userRouter);
 
-app.use(verifyAuthorization);
+// app.use(verifyAuthorization);
+// FOR TESTING
 
 app.use(productRouter);
 

@@ -26,7 +26,7 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     const response = await api.post('login', { email, password });
-    navigate('/products');
+    navigate('/customer/products');
     // setUser(response.data);
     console.log(response.data);
   }
