@@ -9,7 +9,7 @@ function Login() {
     password: '',
   });
 
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
   const navigate = useNavigate();
 
