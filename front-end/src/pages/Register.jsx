@@ -1,75 +1,109 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { registerUser } from '../services/api';
+import '../styles/pages/login.css';
 
-function Register() {
-  const [form, setForm] = useState({
-    nome: '',
-    email: '',
-    password: '',
-  });
+const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLogged, setIsLogged] = useState(false);
+  const [failedTryRegister, setFailedTryRegister] = useState(false);
 
-  const navigate = useNavigate();
-
-  const { email, password, nome } = form;
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(event) {
+  const register = async (event) => {
     event.preventDefault();
-    const response = await api.post('login', { email, password });
-    navigate('/products');
-    setUser(response.data);
-    console.log(response.data);
-  }
+
+    try {
+      const { token, user } = await registerUser('/register', { name, email, password });
+
+      localStorage.setItem('user', JSON.stringify({ token, ...user }));
+      setIsLogged(true);
+    } catch (error) {
+      setFailedTryRegister(true);
+      setIsLogged(false);
+    }
+  };
+
+  const handleChange = (target, stateFunction) => {
+    stateFunction(target.value);
+  };
+
+  useEffect(() => {
+    setFailedTryRegister(false);
+  }, [name, email, password]);
+
+  if (isLogged) return <Navigate to="/products" />;
+
+  const MIN_NAME = 3;
+  const MIN_CHARACTER = 6;
+  const EMAIL_REGEX = /.+@.+\..+/;
 
   return (
-    <>
+    <section>
       <h1>Cadastro</h1>
-      <form onSubmit={ handleSubmit }>
-        <label htmlFor="nome">
+      <form>
+        <label htmlFor="name-input">
           Nome
           <input
-            data-testid="common_register__input-name"
+            className="login__login_input"
             type="text"
-            id="nome"
-            name="nome"
-            value={ nome }
-            onChange={ handleChange }
+            value={ name }
+            onChange={ ({ target }) => handleChange(target, setName) }
+            data-testid="common_register__input-name"
+            placeholder="Seu nome aqui"
           />
         </label>
-        <label htmlFor="email">
+        <label htmlFor="email-input">
           Email
           <input
-            data-testid="common_register__input-email"
+            className="login__login_input"
             type="email"
-            id="email"
-            name="email"
             value={ email }
-            onChange={ handleChange }
+            onChange={ ({ target }) => handleChange(target, setEmail) }
+            data-testid="common_register__input-email"
+            placeholder="Seu email aqui"
           />
         </label>
-        <label htmlFor="password">
-          Password
+        <label htmlFor="password-input">
+          Senha
           <input
-            data-testid="common_register__input-password"
             type="password"
-            id="password"
-            name="password"
             value={ password }
-            onChange={ handleChange }
+            onChange={ ({ target }) => handleChange(target, setPassword) }
+            data-testid="common_register__input-password"
+            placeholder="Digite sua senha"
           />
         </label>
-        <button type="submit" data-testid="common_login__button-login">CADASTRAR</button>
+        {
+          (failedTryRegister)
+            ? (
+              <p data-testid="common_register__element-invalid_register">
+                {
+                  `O endereço de e-mail ou a senha não estão corretos.
+                    Por favor, tente novamente.`
+                }
+              </p>
+            )
+            : null
+        }
+
+        <button
+          data-testid="common_register__button-register"
+          type="submit"
+          onClick={ (event) => register(event) }
+          disabled={
+            password.length < MIN_CHARACTER || !EMAIL_REGEX || name.length < MIN_NAME
+          }
+        >
+          CADASTRAR
+        </button>
+
       </form>
-    </>
+    </section>
+
   );
-}
+};
 
 export default Register;
+
+// https://github.com/tryber/sd-014-a-trybe-futebol-clube/blob/main/app/frontend/src/pages/Login.jsx
