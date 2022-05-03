@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
 
+// teste
 function App() {
   return (
     <BrowserRouter>
