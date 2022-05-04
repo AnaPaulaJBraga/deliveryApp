@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/NavBar';
 import SalesCard from '../components/SalesCard';
-// import PropTypes from 'prop-types';
 
 function SalesOrder() {
   const [sales] = useState([
