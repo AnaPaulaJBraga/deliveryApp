@@ -12,17 +12,27 @@ const Register = () => {
 
   const register = async (event) => {
     event.preventDefault();
-
     try {
-      const { token, user } = await registerUser('/register', { name, email, password });
-
-      localStorage.setItem('user', JSON.stringify({ token, ...user }));
+      const { token } = await registerUser({ name, email, password });
+      localStorage.setItem('user', JSON.stringify({ token }));
       setIsLogged(true);
     } catch (error) {
       setFailedTryRegister(true);
       setIsLogged(false);
     }
   };
+  //   event.preventDefault();
+
+  //   try {
+  //     const { token, user } = await registerUser('/register', { name, email, password });
+
+  //     localStorage.setItem('user', JSON.stringify({ token, ...user }));
+  //     setIsLogged(true);
+  //   } catch (error) {
+  //     setFailedTryRegister(true);
+  //     setIsLogged(false);
+  //   }
+  // };
 
   const handleChange = (target, stateFunction) => {
     stateFunction(target.value);
@@ -30,11 +40,11 @@ const Register = () => {
 
   useEffect(() => {
     setFailedTryRegister(false);
-  }, [name, email, password]);
+  }, [email, password]);
 
-  if (isLogged) return <Navigate to="/products" />;
+  if (isLogged) return <Navigate to="/customer/products" />;
 
-  const MIN_NAME = 3;
+  const MIN_NAME = 12;
   const MIN_CHARACTER = 6;
   const EMAIL_REGEX = /.+@.+\..+/;
 
@@ -91,9 +101,9 @@ const Register = () => {
           data-testid="common_register__button-register"
           type="submit"
           onClick={ (event) => register(event) }
-          disabled={
-            password.length < MIN_CHARACTER || !EMAIL_REGEX || name.length < MIN_NAME
-          }
+          disabled={ password
+            .length < MIN_CHARACTER || !EMAIL_REGEX.test(email) || name
+            .length < MIN_NAME }
         >
           CADASTRAR
         </button>
