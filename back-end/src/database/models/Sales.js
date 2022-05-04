@@ -1,12 +1,30 @@
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define('Sale', {
-    total_price: DataTypes.DECIMAL(9,2),
-    delivery_address: DataTypes.STRING(100),
-    delivery_number: DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
+    totalPrice: {
+      type: DataTypes.DECIMAL(9,2),
+      field: 'total_price',
+    },
+    deliveryAddress: {
+      type: DataTypes.STRING(100),
+      field: 'delivery_address',
+    },
+    deliveryNumber: {
+      type: DataTypes.STRING(50),
+      field: 'delivery_number',
+    },
+    saleDate: {
+      type: DataTypes.DATE,
+      field: 'sale_date',
+    },
     status: DataTypes.STRING(50),
-    user_id: DataTypes.INTEGER,
-    seller_id: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      field: 'user_id',
+    },
+    sellerId: {
+      type: DataTypes.INTEGER,
+      field: 'seller_id',
+    },
   }, { timestamps: false });
   
   Sale.associate = (models) => {

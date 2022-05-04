@@ -1,7 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const SalesProduct = sequelize.define('SalesProduct', {
-    sale_id: DataTypes.INTEGER,
-    product_id: DataTypes.INTEGER,
+    saleId: {
+      type: DataTypes.INTEGER,
+      field: 'sale_id',
+    },
+    productId: { 
+      type: DataTypes.INTEGER,
+      field: 'product_id'
+    },
     quantity: DataTypes.INTEGER,    
   }, { timestamps: false });
 
@@ -18,4 +24,3 @@ module.exports = (sequelize, DataTypes) => {
   }
   return SalesProduct;
 };
-// dasfnj
