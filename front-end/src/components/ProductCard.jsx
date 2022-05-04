@@ -6,8 +6,6 @@ function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   console.log('\n\n\n EVERY INFO: ', prodData);
 
-
-
   return (
     <div
       className="cardFrame"
@@ -27,19 +25,24 @@ function ProductCard({ prodData }) {
 
       <button
         type="button"
-        data-testid={ `customer_products__button-card-add-item-${id}` }
-      >
-        ADICIONAR
-      </button>
-      <p data-testid={ `customer_products__input-card-quantity-${id}` }>
-        0
-      </p>
-      <button
-        type="button"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
         REMOVER
       </button>
+
+      <input
+        data-testid={ `customer_products__input-card-quantity-${id}` }
+        type="number"
+        // pattern="[0-9]*"
+      />
+
+      <button
+        type="button"
+        data-testid={ `customer_products__button-card-add-item-${id}` }
+      >
+        ADICIONAR
+      </button>
+
     </div>
   );
 }
