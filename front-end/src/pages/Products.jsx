@@ -11,7 +11,13 @@ function Products() {
   async function fetchProducts() {
     const response = await api.get('products');
     const allProducts = response.data
-      .map((prod) => <ProductCard key={ prod.id } prodData={ prod } />);
+      .map((prod) => {
+        delete Object.assign(prod, { urlImage: prod.url_image }).url_image;
+        // have to rename url_image to urlImage
+        // https://bobbyhadz.com/blog/javascript-rename-object-key#:~:text=To%20rename%20the%20key%20of,key%20with%20the%20new%20name.
+
+        return <ProductCard key={ prod.id } prodData={ prod } />;
+      });
 
     setProds(allProducts);
     // setLoad(false);
