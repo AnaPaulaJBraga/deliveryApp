@@ -37,7 +37,7 @@ const register = async (userInfo) => {
 
     const accessToken = token({ email, password });
 
-    return { accessToken, user: response.name };
+    return { accessToken, response };
   }
 
   return { code: 409, message: 'User already registered' };
