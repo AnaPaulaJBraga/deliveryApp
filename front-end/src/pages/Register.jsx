@@ -30,15 +30,15 @@ function Register() {
     try {
       const response = await api.post('register', { name, email, password });
       setUser(response.data);
-      const userData = {
-        id: response.data.userLogged.id,
-        nome: response.data.userLogged.name,
-        email: response.data.userLogged.email,
-        role: response.data.userLogged.role,
-        token: response.data.accessToken,
-      };
+      // const userData = {
+      //   id: response.data.userLogged.id,
+      //   nome: response.data.userLogged.name,
+      //   email: response.data.userLogged.email,
+      //   role: response.data.userLogged.role,
+      //   token: response.data.accessToken,
+      // };
 
-      localStorage.userData = JSON.stringify(userData);
+      // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
     } catch (error) {
       setUser(error);
@@ -92,10 +92,7 @@ function Register() {
         {
           user.message && (
             <span data-testid="common_register__element-invalid_register">
-              {
-                `O endereço de e-mail, senha ou nome não estão corretos.
-                    Por favor, tente novamente.`
-              }
+              Dados inválidos.
             </span>
           )
         }
