@@ -5,11 +5,21 @@ function SalesCard({ id, status, order, address, price, date }) {
   return (
     <div className="card">
       <span className="card-body">
-        <p className="card">{status}</p>
+        <p
+          className="card"
+          id={ `seller_orders__element-delivery-status-${id}` }
+        >
+          {status}
+        </p>
         <p className="card" id={ `seller_orders__element-order-id-${id}` }>{order}</p>
-        <p className="card">{address}</p>
-        <p className="card">{price}</p>
-        <p className="card">{date}</p>
+        <p
+          className="card"
+          id={ `seller_orders__element-card-address-${id}` }
+        >
+          {address}
+        </p>
+        <p className="card" id={ `seller_orders__element-card-price-${id}` }>{price}</p>
+        <p className="card" id={ `seller_orders__element-order-date-${id}` }>{date}</p>
       </span>
     </div>
   );
