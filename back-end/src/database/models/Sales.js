@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       field: 'seller_id',
     },
-  }, { timestamps: false });
+  }, { timestamps: false, tableName: 'sales' });
   
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, { foreignKey: 'user_id', as: 'users'});

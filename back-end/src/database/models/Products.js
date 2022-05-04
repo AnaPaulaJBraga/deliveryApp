@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(200),
       field: 'url_image'
     }
-  }, { timestamps: false });
+  }, { timestamps: false, tableName: 'products' });
+  
   return product;
 };

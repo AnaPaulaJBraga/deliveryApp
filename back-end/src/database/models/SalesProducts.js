@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'product_id'
     },
     quantity: DataTypes.INTEGER,    
-  }, { timestamps: false });
+  }, { timestamps: false, tableName: 'salesProducts' });
 
   SalesProduct.associate = (models) => {
     models.Sale.belongsToMany(models.Product, {
@@ -22,5 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'sale_id',
     });
   }
+  
   return SalesProduct;
 };
