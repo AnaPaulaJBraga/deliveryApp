@@ -1,10 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function SalesCard(props) {
   const { id, status, deliveryNumber, deliveryAddress, totalPrice, salesDate } = props;
   return (
-    <span className="card-body">
+    <div className="card card-body text-white bg-primary mb-3">
       <p
         className="card"
         id={ `seller_orders__element-delivery-status-${id}` }
@@ -35,7 +35,7 @@ function SalesCard(props) {
       >
         {salesDate}
       </p>
-    </span>
+    </div>
   );
 }
 
