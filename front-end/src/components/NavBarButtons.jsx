@@ -9,15 +9,30 @@ export default function NavBarButtons() {
             className="nav-link"
             aria-current="page"
             href="myOrders"
+            data-testid="customer_products__element-navbar-link-orders"
           >
             MEUS PEDIDOS
           </a>
         </li>
+
         <li className="nav-item">
-          <a className="nav-link" href="myUser">USUÁRIO AQUI</a>
+          <a
+            className="nav-link"
+            href="myUser"
+            data-testid=" customer_products__element-navbar-user-full-name"
+          >
+            USUÁRIO AQUI
+          </a>
         </li>
+
         <li className="nav-item">
-          <a className="nav-link" href="exit">SAIR</a>
+          <a
+            className="nav-link"
+            href="exit"
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            SAIR
+          </a>
         </li>
       </ul>
     </div>

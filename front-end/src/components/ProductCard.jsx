@@ -8,19 +8,25 @@ function ProductCard({ prodData }) {
   return (
     <div
       className="cardFrame"
-      data-testid={ `customer_products__element-card-id-${id}` }
+      // data-testid={ `customer_products__element-card-title-${id}` }
     >
       <img
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__element-card-img-${urlImage}` }
       />
-      <p data-testid={ `customer_products__element-card-name-${name}` }>
+      <p data-testid={ `customer_products__element-card-title-${name}` }>
         { name }
       </p>
       <p data-testid={ `customer_products__element-card-price-${id}` }>
         { price }
       </p>
+      <button
+        type="button"
+        data-testid={ `customer_products__button-card-add-item-${id}` }
+      >
+        ADICIONAR
+      </button>
     </div>
   );
 }

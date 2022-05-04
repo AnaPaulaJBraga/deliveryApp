@@ -24,7 +24,7 @@ function Products() {
   return (
     <div>
       PRODUCTS
-      <Navbar />
+      <Navbar pageName="Produtos" />
       <div>
         { myProds }
       </div>

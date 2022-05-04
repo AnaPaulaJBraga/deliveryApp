@@ -1,13 +1,20 @@
 import React from 'react';
 // import Button from 'react-bootstrap/esm/Button';
+import PropTypes from 'prop-types';
 import NavBarButtons from './NavBarButtons';
 
-function Navbar() {
+function NavBar({ pageName }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="myProduct">PRODUTOS</a>
+          <a
+            className="navbar-brand"
+            href="myProduct"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            {pageName}
+          </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,4 +33,8 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;
+
+NavBar.propTypes = {
+  pageName: PropTypes.string.isRequired,
+};
