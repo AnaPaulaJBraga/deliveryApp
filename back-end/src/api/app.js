@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const userRouter = require('../routes/userRouter');
 const productRouter = require('../routes/productRouter');
-const verifyAuthorization = require('../middlewares/authorization');
+// const verifyAuthorization = require('../middlewares/authorization');
 
 const app = express();
 
