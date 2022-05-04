@@ -15,7 +15,7 @@ const register = async (req, res) => {
 
   if (result.code) return res.status(result.code).json({ message: result.message });
 
-  res.status(200).json(result);
+  res.status(201).json(result);
 };
 
 module.exports = {
