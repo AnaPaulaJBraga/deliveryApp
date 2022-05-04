@@ -1,119 +1,99 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { registerUser } from '../services/api';
+import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 import '../styles/pages/login.css';
 
-const Register = () => {
-  const [name, setName] = useState('');
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const PASSWORD_LENGTH = 6;
+const MIN_NAME = 12;
+
+function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogged, setIsLogged] = useState(false);
-  const [failedTryRegister, setFailedTryRegister] = useState(false);
+  const [name, setName] = useState('');
+  const [user, setUser] = useState({});
+  const [disabled, setDisabled] = useState(true);
 
-  const register = async (event) => {
-    event.preventDefault();
-    try {
-      const { token } = await registerUser({ name, email, password });
-      localStorage.setItem('user', JSON.stringify({ token }));
-      setIsLogged(true);
-    } catch (error) {
-      setFailedTryRegister(true);
-      setIsLogged(false);
-    }
-  };
-  //   event.preventDefault();
-
-  //   try {
-  //     const { token, user } = await registerUser('/register', { name, email, password });
-
-  //     localStorage.setItem('user', JSON.stringify({ token, ...user }));
-  //     setIsLogged(true);
-  //   } catch (error) {
-  //     setFailedTryRegister(true);
-  //     setIsLogged(false);
-  //   }
-  // };
-
-  const handleChange = (target, stateFunction) => {
-    stateFunction(target.value);
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setFailedTryRegister(false);
-  }, [email, password]);
+    if (emailRegex.test(email) || password.length >= PASSWORD_LENGTH || name
+      .length >= MIN_NAME) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [name, email, password]);
 
-  if (isLogged) return <Navigate to="/customer/products" />;
-
-  const MIN_NAME = 12;
-  const MIN_CHARACTER = 6;
-  const EMAIL_REGEX = /.+@.+\..+/;
+  async function onSubmit(event) {
+    event.preventDefault();
+    try {
+      const { response } = await api.post('register', { name, email, password });
+      // localStorage.setItem('user', JSON.stringify({ response }));
+      setUser({ response });
+      navigate('/customer/products');
+    } catch (error) {
+      setUser(error);
+    }
+  }
 
   return (
-    <section>
-      <h1>Cadastro</h1>
-      <form>
-        <label htmlFor="name-input">
+    <>
+      <h1>Delivery App</h1>
+      <form onSubmit={ onSubmit }>
+        <label htmlFor="name">
           Nome
           <input
-            className="login__login_input"
-            type="text"
-            value={ name }
-            onChange={ ({ target }) => handleChange(target, setName) }
             data-testid="common_register__input-name"
-            placeholder="Seu nome aqui"
+            type="text"
+            id="name"
+            name="name"
+            value={ name }
+            onChange={ ({ target }) => setName(target.value) }
           />
         </label>
-        <label htmlFor="email-input">
+        <label htmlFor="email">
           Email
           <input
-            className="login__login_input"
-            type="email"
-            value={ email }
-            onChange={ ({ target }) => handleChange(target, setEmail) }
             data-testid="common_register__input-email"
-            placeholder="Seu email aqui"
+            type="text"
+            id="email"
+            name="email"
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
-        <label htmlFor="password-input">
-          Senha
+        <label htmlFor="password">
+          Password
           <input
-            type="password"
-            value={ password }
-            onChange={ ({ target }) => handleChange(target, setPassword) }
             data-testid="common_register__input-password"
-            placeholder="Digite sua senha"
+            type="password"
+            id="password"
+            name="password"
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        {
-          (failedTryRegister)
-            ? (
-              <p data-testid="common_register__element-invalid_register">
-                {
-                  `O endereço de e-mail ou a senha não estão corretos.
-                    Por favor, tente novamente.`
-                }
-              </p>
-            )
-            : null
-        }
-
         <button
           data-testid="common_register__button-register"
           type="submit"
-          onClick={ (event) => register(event) }
-          disabled={ password
-            .length < MIN_CHARACTER || !EMAIL_REGEX.test(email) || name
-            .length < MIN_NAME }
+          disabled={ disabled }
         >
           CADASTRAR
         </button>
-
+        {
+          user.message && (
+            <span data-testid="common_register__element-invalid_register">
+              {
+                `O endereço de e-mail, senha ou nome não estão corretos.
+                    Por favor, tente novamente.`
+              }
+            </span>
+          )
+        }
       </form>
-    </section>
-
+    </>
   );
-};
+}
 
 export default Register;
-
-// https://github.com/tryber/sd-014-a-trybe-futebol-clube/blob/main/app/frontend/src/pages/Login.jsx
