@@ -17,8 +17,8 @@ function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (emailRegex.test(email) || password.length >= PASSWORD_LENGTH || name
-      .length >= MIN_NAME) {
+    if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH
+    && name.length >= MIN_NAME) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -29,8 +29,16 @@ function Register() {
     event.preventDefault();
     try {
       const response = await api.post('register', { name, email, password });
-      // localStorage.setItem('user', JSON.stringify({ response }));
       setUser(response.data);
+      const userData = {
+        id: response.data.userLogged.id,
+        nome: response.data.userLogged.name,
+        email: response.data.userLogged.email,
+        role: response.data.userLogged.role,
+        token: response.data.accessToken,
+      };
+
+      localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
     } catch (error) {
       setUser(error);
