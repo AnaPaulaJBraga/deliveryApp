@@ -1,73 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import '../styles/pages/login.css';
 
-function Login() {
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-  });
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const PASSWORD_LENGTH = 6;
 
-  // const [user, setUser] = useState({});
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
+  const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
-  const { email, password } = form;
+  useEffect(() => {
+    if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [email, password]);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    const response = await api.post('login', { email, password });
-    navigate('/products');
-    // setUser(response.data);
-    console.log(response.data);
+    try {
+      const response = await api.post('login', { email, password });
+      setUser(response.data);
+      navigate('/products');
+    } catch (error) {
+      setUser(error);
+    }
   }
 
   return (
-    <div>
+    <>
       <h1>Delivery App</h1>
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ onSubmit }>
         <label htmlFor="email">
+          Email
           <input
             data-testid="common_login__input-email"
-            type="email"
+            type="text"
             id="email"
             name="email"
             value={ email }
-            onChange={ handleChange }
-            placeholder="Digite seu email"
+            onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
         <label htmlFor="password">
+          Password
           <input
             data-testid="common_login__input-password"
             type="password"
             id="password"
             name="password"
             value={ password }
-            onChange={ handleChange }
-            placeholder="Digite sua senha"
+            onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        <button type="submit" data-testid="common_login__button-login">Login</button>
+        <button
+          data-testid="common_login__button-login"
+          type="submit"
+          disabled={ disabled }
+        >
+          Login
+        </button>
         <Link to="/register">
           <button
-            type="button"
             data-testid="common_login__button-register"
+            type="button"
           >
             Ainda não tenho conta
           </button>
         </Link>
+        {
+          user.message && (
+            <span data-testid="common_login__element-invalid-email">
+              Invalid fields
+            </span>
+          )
+        }
       </form>
-    </div>
+    </>
   );
 }
 
