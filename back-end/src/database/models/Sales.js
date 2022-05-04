@@ -16,4 +16,3 @@ module.exports = (sequelize, DataTypes) => {
 
   return Sale;
 };
-// gvhasdrenjaet

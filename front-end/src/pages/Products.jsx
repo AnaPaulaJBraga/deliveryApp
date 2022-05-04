@@ -12,6 +12,7 @@ function Products() {
     const response = await api.get('products');
     const allProducts = response.data
       .map((prod) => <ProductCard key={ prod.id } prodData={ prod } />);
+
     setProds(allProducts);
     // setLoad(false);
     return allProducts;

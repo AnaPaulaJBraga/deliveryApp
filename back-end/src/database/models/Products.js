@@ -4,6 +4,5 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL(4, 2),
     url_image: DataTypes.STRING(200)
   }, { timestamps: false });
-  // afsdasgdsg
   return product;
 };
