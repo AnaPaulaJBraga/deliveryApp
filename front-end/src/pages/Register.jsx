@@ -28,9 +28,9 @@ function Register() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const { response } = await api.post('register', { name, email, password });
+      const response = await api.post('register', { name, email, password });
       // localStorage.setItem('user', JSON.stringify({ response }));
-      setUser({ response });
+      setUser(response.data);
       navigate('/customer/products');
     } catch (error) {
       setUser(error);
