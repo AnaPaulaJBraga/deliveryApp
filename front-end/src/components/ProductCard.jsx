@@ -5,22 +5,24 @@ import PropTypes from 'prop-types';
 function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   console.log('\n\n\n EVERY INFO: ', prodData);
+  console.log('URL IMAGE', urlImage);
 
   return (
     <div
       className="cardFrame"
-      // data-testid={ `customer_products__element-card-title-${name}` }
     >
+      <p data-testid={ `customer_products__element-card-price-${id}` }>
+        { `R$${price.replace('.', ',')}` }
+      </p>
+
       <img
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
+
       <p data-testid={ `customer_products__element-card-title-${id}` }>
         { name }
-      </p>
-      <p data-testid={ `customer_products__element-card-price-${id}` }>
-        { price }
       </p>
 
       <button
@@ -33,7 +35,6 @@ function ProductCard({ prodData }) {
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
-        // pattern="[0-9]*"
       />
 
       <button
@@ -42,7 +43,6 @@ function ProductCard({ prodData }) {
       >
         ADICIONAR
       </button>
-
     </div>
   );
 }
@@ -58,4 +58,6 @@ ProductCard.propTypes = {
 
 export default ProductCard;
 
-// Note: a urlImage está funcionando, mas fica dificil de testar porque a url vem como localhost:3001, mas o <npm start> local roda geralmente em 3002
+// URL IMG NOT WORKING
+
+// ADD AND REMOVE HAVE NO FUCNTIONALITIES SO FAR
