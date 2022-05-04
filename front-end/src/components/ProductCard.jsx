@@ -1,14 +1,16 @@
 import React from 'react';
+import '../styles/components/productCard.css';
 
 function ProductCard({ prodData }) {
   const { name, price, urlImage } = prodData;
-  console.log('\n\n\n NAME: ', name);
+  console.log('\n\n\n NAME: ', urlImage);
   return (
-    <span>
+    <div className="cardFrame">
       THIS IS A PRODUCT
+      <img src={ urlImage }/>
       <p>{ name }</p>
       <p>{ price }</p>
-    </span>
+    </div>
   );
 }
 
