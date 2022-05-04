@@ -27,6 +27,15 @@ function Login() {
     try {
       const response = await api.post('login', { email, password });
       setUser(response.data);
+      const userData = {
+        id: response.data.userLogged.id,
+        nome: response.data.userLogged.name,
+        email: response.data.userLogged.email,
+        role: response.data.userLogged.role,
+        token: response.data.accessToken,
+      };
+
+      localStorage.userData = JSON.stringify(userData);
       navigate('/products');
     } catch (error) {
       setUser(error);
