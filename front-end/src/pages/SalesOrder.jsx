@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/NavBar';
 import SalesCard from '../components/SalesCard';
 // import PropTypes from 'prop-types';
 
 function SalesOrder() {
-  const [sales] = React.useState([
+  const [sales] = useState([
     {
       status: 'Pendente',
-      order: '12345',
-      address: 'Rua dos bobos, 0',
-      price: 'R$ 10,00',
-      date: '01/01/2020',
+      deliveryNumber: '12345',
+      deliveryAddress: 'Rua dos bobos, 0',
+      totalPrice: 'R$ 10,00',
+      salesDate: '01/01/2020',
     },
     {
       status: 'Entregue',
-      order: '12',
-      address: 'Rua dos bobos, 1',
-      price: 'R$ 90,00',
-      date: '04/05/2022',
+      deliveryNumber: '12',
+      deliveryAddress: 'Rua dos bobos, 1',
+      totalPrice: 'R$ 90,00',
+      salesDate: '04/05/2022',
     },
   ]);
   return (
@@ -29,17 +29,15 @@ function SalesOrder() {
             key={ sale.order }
             id="1"
             status={ sale.status }
-            order={ sale.order }
-            address={ sale.address }
-            price={ sale.price }
-            date={ sale.date }
+            deliveryNumber={ sale.deliveryNumber }
+            deliveryAddress={ sale.deliveryAddress }
+            totalPrice={ sale.totalPrice }
+            salesDate={ sale.salesDate }
           />
         ))
       }
     </div>
   );
 }
-
-// SalesOrder.propTypes = {};
 
 export default SalesOrder;
