@@ -4,15 +4,15 @@ import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 
 function Products() {
-  // function makeProdCards(products) {
-  // }
   // const [load, setLoad] = useState(true);
   const [myProds, setProds] = useState([]);
+
   async function fetchProducts() {
     const response = await api.get('products');
     const allProducts = response.data
       .map((prod) => {
-        delete Object.assign(prod, { urlImage: prod.url_image }).url_image;
+        // delete Object.assign(prod, { urlImage: prod.url_image }).url_image;
+
         // have to rename url_image to urlImage
         // https://bobbyhadz.com/blog/javascript-rename-object-key#:~:text=To%20rename%20the%20key%20of,key%20with%20the%20new%20name.
 

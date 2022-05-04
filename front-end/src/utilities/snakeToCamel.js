@@ -1,4 +1,4 @@
-export default snakeToCamel = (snakeWord) => {
+export default snakeToCamelString = (snakeWord) => {
   const SECONDWORDSLICE = -1;
   const camelWord = snakeWord
     .toLowerCase()
