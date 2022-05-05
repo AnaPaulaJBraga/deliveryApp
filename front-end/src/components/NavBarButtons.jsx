@@ -1,6 +1,8 @@
 import React from 'react';
+import LocalUserData from './LocalUserData';
 
 export default function NavBarButtons() {
+  const { name } = LocalUserData();
   return (
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -21,7 +23,7 @@ export default function NavBarButtons() {
             href="myUser"
             data-testid=" customer_products__element-navbar-user-full-name"
           >
-            USUÁRIO AQUI
+            { name }
           </a>
         </li>
 
