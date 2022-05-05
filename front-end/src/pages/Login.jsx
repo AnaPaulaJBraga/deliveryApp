@@ -12,7 +12,7 @@ function Login() {
   const [user, setUser] = useState({});
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH) {
       setDisabled(false);
@@ -20,7 +20,7 @@ function Login() {
       setDisabled(true);
     }
   }, [email, password]);
-  
+
   async function onSubmit(event) {
     event.preventDefault();
     try {
