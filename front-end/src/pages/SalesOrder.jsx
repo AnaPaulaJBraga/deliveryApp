@@ -5,7 +5,7 @@ import SalesCard from '../components/SalesCard';
 function SalesOrder() {
   const [sales, setSales] = useState();
 
-  const getSales = async () => {
+  async function getSales() {
     // const response = await fetch('/api/sales');
     // const data = await response.json();
     const data = [
@@ -26,7 +26,11 @@ function SalesOrder() {
     ];
 
     setSales(data);
-  };
+  }
+
+  useEffect(() => {
+    getSales();
+  }, []);
 
   return (
     <div>
