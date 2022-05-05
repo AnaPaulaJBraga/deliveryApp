@@ -32,7 +32,7 @@ const register = async (userInfo) => {
 
   if (!user) {
     const hashPassword = md5(password);
-    const hashPasswordUser = { name, email, password: hashPassword, role: 'custumer' };
+    const hashPasswordUser = { name, email, password: hashPassword, role: 'customer' };
     const response = await User.create(hashPasswordUser);
 
     const accessToken = token({ email, password });

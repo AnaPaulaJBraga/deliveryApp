@@ -28,15 +28,17 @@ function Register() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await api.post('register', { name, email, password });
-      setUser(response.data);
-      // const userData = {
-      //   id: response.data.userLogged.id,
-      //   nome: response.data.userLogged.name,
-      //   email: response.data.userLogged.email,
-      //   role: response.data.userLogged.role,
-      //   token: response.data.accessToken,
-      // };
+      const registerUser = await api.post('register', { name, email, password });
+      setUser(registerUser.data);
+
+      const userData = {
+        id: registerUser.data.response.id,
+        nome: registerUser.data.response.name,
+        email: registerUser.data.response.email,
+        role: registerUser.data.response.role,
+        token: registerUser.data.accessToken,
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
 
       // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
