@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
 import SalesOrder from './pages/SalesOrder';
+import SalesDetails from './pages/SalesDetails';
 
 // teste
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
         <Route path="/seller/orders" element={ <SalesOrder /> } />
+        <Route exact path="/seller/orders/id" element={ <SalesDetails /> } />
       </Routes>
     </BrowserRouter>
   );
