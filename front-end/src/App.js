@@ -15,7 +15,7 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
-        <Route path="/seller/order/1" element={ <SalesOrder /> } />
+        <Route path="/seller/orders" element={ <SalesOrder /> } />
       </Routes>
     </BrowserRouter>
   );
