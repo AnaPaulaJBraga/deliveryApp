@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const userRouter = require('../routes/userRouter');
 const productRouter = require('../routes/productRouter');
+const saleRouter = require('../routes/saleRouter');
 const verifyAuthorization = require('../middlewares/authorization');
 
 const app = express();
@@ -14,5 +15,6 @@ app.use(userRouter);
 app.use(verifyAuthorization);
 
 app.use(productRouter);
+app.use(saleRouter);
 
 module.exports = app;
