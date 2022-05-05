@@ -1,58 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import '../styles/pages/login.css';
+
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const PASSWORD_LENGTH = 6;
+const MIN_NAME = 12;
 
 function Register() {
-  const [form, setForm] = useState({
-    nome: '',
-    email: '',
-    password: '',
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [user, setUser] = useState({});
+  const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
-  const { email, password, nome } = form;
+  useEffect(() => {
+    if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH
+    && name.length >= MIN_NAME) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [name, email, password]);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    const response = await api.post('login', { email, password });
-    navigate('/products');
-    setUser(response.data);
-    console.log(response.data);
+    try {
+      const registerUser = await api.post('register', { name, email, password });
+      setUser(registerUser.data);
+
+      const userData = {
+        id: registerUser.data.response.id,
+        nome: registerUser.data.response.name,
+        email: registerUser.data.response.email,
+        role: registerUser.data.response.role,
+        token: registerUser.data.accessToken,
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      // localStorage.userData = JSON.stringify(userData);
+      navigate('/customer/products');
+    } catch (error) {
+      setUser(error);
+    }
   }
 
   return (
     <>
-      <h1>Cadastro</h1>
-      <form onSubmit={ handleSubmit }>
-        <label htmlFor="nome">
+      <h1>Delivery App</h1>
+      <form onSubmit={ onSubmit }>
+        <label htmlFor="name">
           Nome
           <input
             data-testid="common_register__input-name"
             type="text"
-            id="nome"
-            name="nome"
-            value={ nome }
-            onChange={ handleChange }
+            id="name"
+            name="name"
+            value={ name }
+            onChange={ ({ target }) => setName(target.value) }
           />
         </label>
         <label htmlFor="email">
           Email
           <input
             data-testid="common_register__input-email"
-            type="email"
+            type="text"
             id="email"
             name="email"
             value={ email }
-            onChange={ handleChange }
+            onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
         <label htmlFor="password">
@@ -63,10 +81,23 @@ function Register() {
             id="password"
             name="password"
             value={ password }
-            onChange={ handleChange }
+            onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        <button type="submit" data-testid="common_login__button-login">CADASTRAR</button>
+        <button
+          data-testid="common_register__button-register"
+          type="submit"
+          disabled={ disabled }
+        >
+          CADASTRAR
+        </button>
+        {
+          user.message && (
+            <span data-testid="common_register__element-invalid_register">
+              Dados inválidos.
+            </span>
+          )
+        }
       </form>
     </>
   );

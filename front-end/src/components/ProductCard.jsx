@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
+import { addItem, removeItem } from './Cart';
 
 function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
-  console.log('\n\n\n EVERY INFO: ', prodData);
-  console.log('URL IMAGE', urlImage);
+  // console.log('\n\n\n EVERY INFO: ', prodData);
+  // console.log('URL IMAGE', urlImage);
+
+  const [curInput, setInput] = useState(0);
+
+  // const addToCart = ({ target }) => {
+  //   addItem();
+  // };
+
+  // const rmvFromCart = ({ target }) => {
+  //   removeItem();
+  // };
+
+  const handleInputChange = ({ target }) => {
+
+  };
+
+  const plusOneItem = ({ target }) => {
+    setInput(curInput + 1);
+  };
+
+  const minusOneItem = ({ target }) => {
+    if (curInput < 1) return null;
+    setInput(curInput - 1);
+  };
 
   return (
     <div
@@ -28,20 +52,24 @@ function ProductCard({ prodData }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
+        onClick={ minusOneItem }
       >
-        REMOVER
+        -
       </button>
 
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
+        value={ curInput }
+        onChange={ handleInputChange }
       />
 
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
+        onClick={ plusOneItem }
       >
-        ADICIONAR
+        +
       </button>
     </div>
   );
