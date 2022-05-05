@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
-import { addItem, removeItem } from './Cart';
+import { setCart, removeItem } from './Cart';
 
 function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   // console.log('\n\n\n EVERY INFO: ', prodData);
-  console.log('URL IMAGE', urlImage);
   const [itemQty, setItemQty] = useState(0);
   const prodPackage = { id, name, price: parseFloat(price), itemQty };
 
-  const addToCart = ({ target }) => {
-    addItem(prodPackage);
+  const handleInputChange = () => {
+    setCart(prodPackage);
   };
 
-  const rmvFromCart = ({ target }) => {
-    removeItem(prodPackage);
-  };
-
-  const handleInputChange = ({ target }) => {
-
-  };
-
-  const plusOneItem = ({ target }) => {
+  const plusOneItem = () => {
     setItemQty(itemQty + 1);
   };
 
-  const minusOneItem = ({ target }) => {
-    if (itemQty < 1) return null;
+  const minusOneItem = () => {
+    if (itemQty < 1) removeItem(prodPackage);
     setItemQty(itemQty - 1);
   };
 
@@ -43,6 +34,7 @@ function ProductCard({ prodData }) {
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
+        className="cardImage"
       />
 
       <p data-testid={ `customer_products__element-card-title-${id}` }>

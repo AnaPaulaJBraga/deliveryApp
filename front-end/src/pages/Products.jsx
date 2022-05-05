@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavBar';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
+import '../styles/pages/products.css';
 
 function Products() {
   // const [load, setLoad] = useState(true);
@@ -25,9 +26,9 @@ function Products() {
     <div>
       PRODUCTS
       <Navbar pageName="Produtos" />
-      <div>
+      <span className='="productList'>
         { myProds }
-      </div>
+      </span>
     </div>
   );
 }

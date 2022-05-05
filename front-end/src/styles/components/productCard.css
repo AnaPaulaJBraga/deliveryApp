@@ -1,4 +1,10 @@
 .cardFrame {
   background-color: rgb(52, 26, 43);
   color: bisque;
+  width: 378px;
+  height: 486px;
+}
+
+.cardImage {
+  height: 150px;
 }
