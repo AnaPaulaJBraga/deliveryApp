@@ -38,7 +38,7 @@ function Register() {
         role: registerUser.data.response.role,
         token: registerUser.data.accessToken,
       };
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userData', JSON.stringify(userData));
 
       // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
