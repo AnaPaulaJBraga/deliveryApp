@@ -8,7 +8,7 @@ function SalesCard(props) {
     totalPrice, salesDate } = props;
 
   return (
-    <div className="card card-body text-white bg-primary mb-3">
+    <div className="card card-body bg-primary mb-3">
       <p
         className="card"
         id={ `${role}_orders__element-delivery-status-${id}` }

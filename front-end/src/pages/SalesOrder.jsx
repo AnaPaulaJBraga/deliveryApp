@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavBar';
-import SalesCard from '../components/SalesCard';
+import OrderCard from '../components/OrderCard';
 
 function SalesOrder() {
-  const [sales, setSales] = useState();
+  const [sales, setSales] = useState([]);
+  console.log('=====>', sales);
+  const role = 'sales';
+  const id = 1;
 
   async function getSales() {
-    // const response = await fetch('/api/sales');
+    // const response = await fetch('/api/sales/id');
     // const data = await response.json();
     const data = [
       {
@@ -37,9 +40,10 @@ function SalesOrder() {
       <Navbar />
       {
         sales.map((sale) => (
-          <SalesCard
-            key={ sale.order }
-            id="1"
+          <OrderCard
+            key={ sale.deliveryNumber }
+            id={ id }
+            role={ role }
             status={ sale.status }
             deliveryNumber={ sale.deliveryNumber }
             deliveryAddress={ sale.deliveryAddress }
