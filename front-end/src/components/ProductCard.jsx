@@ -6,29 +6,29 @@ import { addItem, removeItem } from './Cart';
 function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   // console.log('\n\n\n EVERY INFO: ', prodData);
-  // console.log('URL IMAGE', urlImage);
+  console.log('URL IMAGE', urlImage);
+  const [itemQty, setItemQty] = useState(0);
+  const prodPackage = { id, name, price: parseFloat(price), itemQty };
 
-  const [curInput, setInput] = useState(0);
+  const addToCart = ({ target }) => {
+    addItem(prodPackage);
+  };
 
-  // const addToCart = ({ target }) => {
-  //   addItem();
-  // };
-
-  // const rmvFromCart = ({ target }) => {
-  //   removeItem();
-  // };
+  const rmvFromCart = ({ target }) => {
+    removeItem(prodPackage);
+  };
 
   const handleInputChange = ({ target }) => {
 
   };
 
   const plusOneItem = ({ target }) => {
-    setInput(curInput + 1);
+    setItemQty(itemQty + 1);
   };
 
   const minusOneItem = ({ target }) => {
-    if (curInput < 1) return null;
-    setInput(curInput - 1);
+    if (itemQty < 1) return null;
+    setItemQty(itemQty - 1);
   };
 
   return (
@@ -60,7 +60,7 @@ function ProductCard({ prodData }) {
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
-        value={ curInput }
+        value={ itemQty }
         onChange={ handleInputChange }
       />
 
@@ -85,7 +85,3 @@ ProductCard.propTypes = {
 };
 
 export default ProductCard;
-
-// URL IMG NOT WORKING
-
-// ADD AND REMOVE HAVE NO FUCNTIONALITIES SO FAR

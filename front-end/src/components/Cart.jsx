@@ -1,21 +1,21 @@
 import React from "react";
 
 export const getCart = () => {
-  const { myCart } = localStorage.getItem('userData');
-  console.log('\n\n\n\n\nold and regular function', myCart);
-
+  const { myCart } = localStorage.getItem('cartData');
   // const newWay = localStorage.userData();
-  // console.log('\n new way?????:', newWay);
+  console.log('\n\n\n current Cart:', myCart);
   return myCart;
 };
 
 export const addItem = (item) => {
-  // const myCart = getCart();
-  // const newCart = { ...myCart, item };
-  // JSON.stringy(localStorage.setItem());
-  alert('ADD ITEM LOGIC HERE');
+  const myCart = getCart();
+  const newCart = [...myCart, item];
+  JSON.stringfy(localStorage.setItem('cartData', newCart));
+  // alert('ADD ITEM LOGIC HERE');
 };
 
 export const removeItem = (item) => {
-  alert('REMOVE ITEM LOGIC HERE');
+  // alert('REMOVE ITEM LOGIC HERE');
 };
+
+// cartData from storage is an array
