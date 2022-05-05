@@ -57,7 +57,7 @@ function ProductCard({ prodData }) {
         data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
         value={ itemQty }
-        // onChange={ handleInputChange }
+        onChange={ handleInputChange }
       />
 
       <button
