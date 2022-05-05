@@ -4,7 +4,6 @@ import OrderCard from '../components/OrderCard';
 
 function SalesOrder() {
   const [sales, setSales] = useState([]);
-  console.log('=====>', sales);
   const role = 'sales';
   const id = 1;
 
