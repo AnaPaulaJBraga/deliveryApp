@@ -35,7 +35,7 @@ function Login() {
         token: response.data.accessToken,
       };
 
-      localStorage.userData = JSON.stringify(userData);
+      localStorage.user = JSON.stringify(userData);
 
       if (response.data.userLogged.role === 'customer') {
         navigate('/products');

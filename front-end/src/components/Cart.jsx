@@ -9,8 +9,6 @@ export const getCart = () => {
     return [];
   }
   console.log('local cart was NOT empty!');
-  // const newWay = localStorage.userData();
-  // console.log('\n userData:', localStorage.getItem('userData'));
   return JSON.parse(myCart);
 };
 

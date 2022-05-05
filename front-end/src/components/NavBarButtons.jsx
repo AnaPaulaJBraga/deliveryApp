@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LocalUserData from './LocalUserData';
 
 export default function NavBarButtons() {
   const { name } = LocalUserData();
+  const handleLogout = () => {
+    localStorage.clear();
+  };
   return (
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -23,18 +27,20 @@ export default function NavBarButtons() {
             href="myUser"
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            { name }
+            { name || 'teste'}
           </a>
         </li>
 
         <li className="nav-item">
-          <a
+          <Link
             className="nav-link"
-            href="exit"
+            // href="login"
+            to="/login"
             data-testid="customer_products__element-navbar-link-logout"
+            onClick={ handleLogout }
           >
             SAIR
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
