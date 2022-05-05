@@ -1,15 +1,23 @@
 // import React from 'react';
 
 export const getCart = () => {
-  const myCart = localStorage.getItem('cartData');
+  console.log('IN getCart');
+  const myCart = JSON.parse(localStorage.getItem('cartData'));
+  if (!myCart) {
+    localStorage.setItem('cartData', JSON.stringify([]));
+    return [];
+  }
   // const newWay = localStorage.userData();
   console.log('\n\n\n current Cart:', myCart);
+  // console.log('\n userData:', localStorage.getItem('userData'));
   return myCart;
 };
 
 export const setCart = (item) => {
   const myCart = getCart();
-  const newCart = [...myCart, item];
+  console.log(myCart);
+  // const newCart = [...myCart, item];
+  const newCart = item;
   JSON.stringify(localStorage.setItem('cartData', newCart));
   // alert('ADD ITEM LOGIC HERE');
 };

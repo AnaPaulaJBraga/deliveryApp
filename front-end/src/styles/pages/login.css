@@ -8,8 +8,7 @@ body {
 }
 
 form {
-  /* background-color: rgb(181, 187, 196); */
-  background-color:rgb(26, 25, 25);
+  background-color: rgb(26, 25, 25);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   color: white;
   display: flex;

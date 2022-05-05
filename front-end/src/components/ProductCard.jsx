@@ -7,19 +7,24 @@ function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   // console.log('\n\n\n EVERY INFO: ', prodData);
   const [itemQty, setItemQty] = useState(0);
-  const prodPackage = { id, name, price: parseFloat(price), itemQty };
 
   const handleInputChange = () => {
+    console.log('INPUT CHANGE!');
+    const prodPackage = { id, name, price: parseFloat(price), itemQty };
+    console.log('THIS IS PRODUCT PACKAGE', prodPackage);
     setCart(prodPackage);
   };
 
   const plusOneItem = () => {
     setItemQty(itemQty + 1);
+    handleInputChange();
+    // handleIn
   };
 
   const minusOneItem = () => {
     if (itemQty < 1) removeItem(prodPackage);
     setItemQty(itemQty - 1);
+    handleInputChange();
   };
 
   return (
