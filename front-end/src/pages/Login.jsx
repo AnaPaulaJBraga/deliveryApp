@@ -11,9 +11,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
   const [disabled, setDisabled] = useState(true);
-
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH) {
       setDisabled(false);
@@ -21,12 +20,13 @@ function Login() {
       setDisabled(true);
     }
   }, [email, password]);
-
+  
   async function onSubmit(event) {
     event.preventDefault();
     try {
       const response = await api.post('login', { email, password });
       setUser(response.data);
+
       const userData = {
         id: response.data.userLogged.id,
         nome: response.data.userLogged.name,
@@ -36,7 +36,11 @@ function Login() {
       };
 
       localStorage.userData = JSON.stringify(userData);
-      navigate('/products');
+
+      if (response.data.userLogged.role === 'customer') {
+        navigate('/products');
+      }
+      navigate('/seller/orders');
     } catch (error) {
       setUser(error);
     }
