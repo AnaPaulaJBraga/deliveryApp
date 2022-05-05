@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../components/NavBar';
+// import Navbar from '../components/NavBar';
 
 function Products() {
   return (
-    <Navbar />
+    <h1> Teste</h1>
   );
 }
 
