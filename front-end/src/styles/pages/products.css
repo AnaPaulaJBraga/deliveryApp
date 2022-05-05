@@ -4,7 +4,7 @@ body {
 }
 
 .productList {
-  position: absolute;
   height: 1166px;
   width: 1800px;
+  position: absolute;
 }
