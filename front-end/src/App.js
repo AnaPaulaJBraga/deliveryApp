@@ -17,7 +17,7 @@ function App() {
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
         <Route path="/seller/orders" element={ <SalesOrder /> } />
-        <Route exact path="/seller/orders/id" element={ <SalesDetails /> } />
+        <Route path="/seller/orders/id" element={ <SalesDetails /> } />
       </Routes>
     </BrowserRouter>
   );
