@@ -11,7 +11,6 @@ function Login() {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState({});
   const [disabled, setDisabled] = useState(true);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,16 +26,21 @@ function Login() {
     try {
       const response = await api.post('login', { email, password });
       setUser(response.data);
+
       const userData = {
         id: response.data.userLogged.id,
-        nome: response.data.userLogged.name,
+        name: response.data.userLogged.name,
         email: response.data.userLogged.email,
         role: response.data.userLogged.role,
         token: response.data.accessToken,
       };
 
-      localStorage.userData = JSON.stringify(userData);
-      navigate('/products');
+      localStorage.user = JSON.stringify(userData);
+
+      if (response.data.userLogged.role === 'customer') {
+        navigate('/products');
+      }
+      navigate('/seller/orders');
     } catch (error) {
       setUser(error);
     }
