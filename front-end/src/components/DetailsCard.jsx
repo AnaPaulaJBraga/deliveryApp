@@ -1,12 +1,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-function OrderDetails() {
+function DetailsCard() {
   return (
-    <div>OrderDetails</div>
+    <p>Componenente sendo editado</p>
   );
 }
 
-// OrderDetails.propTypes = {};
+// DetailsCard.propTypes = {};
 
-export default OrderDetails;
+export default DetailsCard;

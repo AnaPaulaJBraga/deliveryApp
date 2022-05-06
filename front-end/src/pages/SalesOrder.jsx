@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavBar';
 import OrderCard from '../components/OrderCard';
+import api from '../services/api';
 
 function SalesOrder() {
   const [sales, setSales] = useState([]);
   const role = 'sales';
-  const id = 1;
+  const { id } = JSON.parse(localStorage.getItem('userData'));
 
   async function getSales() {
-    // const response = await fetch('/api/sales/id');
-    // const data = await response.json();
+    const { token } = JSON.parse(localStorage.getItem('userData'));
+    const response = await api.get(`/sale/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
     const data = [
       {
         status: 'Pendente',
@@ -26,8 +32,8 @@ function SalesOrder() {
         salesDate: '04/05/2022',
       },
     ];
-
-    setSales(data);
+    // data apenas para teste
+    setSales((response.data.length > 0) ? response.data : data);
   }
 
   useEffect(() => {
