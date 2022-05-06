@@ -1,0 +1,10 @@
+body {
+  background-color: #1e1b1b;
+  color: aliceblue;
+}
+
+.productList {
+  height: 1166px;
+  position: absolute;
+  width: 1800px;
+}

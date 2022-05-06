@@ -33,12 +33,12 @@ function Register() {
 
       const userData = {
         id: registerUser.data.response.id,
-        nome: registerUser.data.response.name,
+        name: registerUser.data.response.name,
         email: registerUser.data.response.email,
         role: registerUser.data.response.role,
         token: registerUser.data.accessToken,
       };
-      localStorage.setItem('userData', JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(userData));
 
       // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
