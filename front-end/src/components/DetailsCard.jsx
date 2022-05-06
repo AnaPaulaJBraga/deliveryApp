@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-function DetailsCard({ data }) {
+function DetailsCard({ dataOrder }) {
   const {
     status,
     deliveryNumber,
     salesDate,
     order,
-  } = data;
+  } = dataOrder;
 
   return (
     <div>
       <h5>Detalhe do Pedido</h5>
-      <div className="card-body">
+      {/* <div className="card-body">
         <div className="row">
           <div className="col-md-6">
             Pedido
@@ -41,13 +41,13 @@ function DetailsCard({ data }) {
             <p className="col-md-12">{ item.quantity * item.price }</p>
           </div>
         )) }
-      </div>
+      </div> */}
     </div>
   );
 }
 
 DetailsCard.propTypes = {
-  data: PropTypes.shape({
+  dataOrder: PropTypes.shape({
     status: PropTypes.string.isRequired,
     deliveryNumber: PropTypes.string.isRequired,
     salesDate: PropTypes.string.isRequired,
