@@ -38,7 +38,6 @@ function Products() {
           href="/checkout"
           data-testid="customer_products__button-cart"
         >
-          {/* Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00 */}
           Checkout~
         </a>
         <h2 data-testid="customer_products__checkout-bottom-value">
@@ -47,6 +46,8 @@ function Products() {
         </h2>
       </footer>
     );
+    //  Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00
+
     // Ele consta como footer mas eu coloquei no topo da pagina pra ficar mais facil de acessar ele durante o desenvolvimento
   }
 
