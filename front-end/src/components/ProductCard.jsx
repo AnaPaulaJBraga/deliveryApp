@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
 import { setCart, removeItem } from './Cart';
+import moneyToString from '../utilities/moneyStringConvert';
 
-function ProductCard({ prodData }) {
+function ProductCard({ prodData, calcPrice }) {
   const { id, name, price, urlImage } = prodData;
   const [itemQty, setItemQty] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -12,9 +13,11 @@ function ProductCard({ prodData }) {
     const parsedValue = parseInt(value, 10);
     if (value === '' || parsedValue === 0) {
       return setItemQty(0);
+      // return calcPrice();
     }
     if (value.isNaN) return null;
     return setItemQty(parsedValue);
+    // return calcPrice();
   };
 
   const plusOneItem = () => setItemQty(itemQty + 1);
@@ -26,8 +29,13 @@ function ProductCard({ prodData }) {
 
   useEffect(() => {
     if (itemQty === 0 && loading) return null;
-    if (itemQty === 0 && !loading) return removeItem(id);
-    return setCart({ id, name, price: parseFloat(price), itemQty });
+    if (itemQty === 0 && !loading) {
+      removeItem(id);
+      console.log('SHOULD HAVE BEEN REMOVED ALREADY');
+      return calcPrice();
+    }
+    setCart({ id, name, price: parseFloat(price), itemQty });
+    return calcPrice();
   }, [itemQty]);
   // it won't shut up about dependencies but you can just ignore it
 
@@ -40,7 +48,7 @@ function ProductCard({ prodData }) {
       className="cardFrame"
     >
       <p data-testid={ `customer_products__element-card-price-${id}` }>
-        { `R$${price.replace('.', ',')}` }
+        { `R$${moneyToString(price)}` }
       </p>
 
       <img
@@ -87,6 +95,7 @@ ProductCard.propTypes = {
     price: PropTypes.string,
     urlImage: PropTypes.string,
   }).isRequired,
+  calcPrice: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

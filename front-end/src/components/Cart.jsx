@@ -23,6 +23,7 @@ export const setCart = (item) => {
 };
 
 export const removeItem = (id) => {
+  console.log('REMOVING');
   // console.log('REMOVING ITEM FROM CART!');
   const myCart = getCart();
   const itemRemoved = myCart.filter((item) => item.id !== id);
