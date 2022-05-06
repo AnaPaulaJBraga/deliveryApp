@@ -5,6 +5,7 @@ import DetailsBody from './DetailsBody';
 
 function DetailsCard({ data }) {
   const {
+    role,
     order,
   } = data;
   const total = order.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
@@ -22,7 +23,12 @@ function DetailsCard({ data }) {
           <p>Sub-total</p>
         </div>
         <DetailsBody data={ data } />
-        <div className="text-end">{ `R$ ${total.toFixed(2)}` }</div>
+        <div
+          className="text-end"
+          data-testid={ `${role}_order_details__element-order-total-price` }
+        >
+          { `R$ ${total.toFixed(2)}` }
+        </div>
       </div>
     </div>
   );
@@ -30,11 +36,7 @@ function DetailsCard({ data }) {
 
 DetailsCard.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     role: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    deliveryNumber: PropTypes.string.isRequired,
-    salesDate: PropTypes.string.isRequired,
     order: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
