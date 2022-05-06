@@ -4,6 +4,7 @@ import Navbar from '../components/NavBar';
 
 function SalesDetails() {
   const [dataOrder] = useState({
+    id: 2,
     role: 'seller',
     status: 'Pendente',
     deliveryNumber: '12345',

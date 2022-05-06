@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DetailsHeader from './DetailsHeader';
 
 function DetailsCard({ data }) {
   const {
-    role,
-    status,
-    deliveryNumber,
-    salesDate,
     order,
   } = data;
   const total = order.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
@@ -16,25 +13,7 @@ function DetailsCard({ data }) {
       <h5>Detalhe do Pedido</h5>
 
       <div className="card card-body bg-primary mb-3">
-        <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-          <p
-            className="card text-primary text-center"
-            data-testid={
-              `${role}_order_details__element-order-details-label-order-${id}` }
-          >
-            Pedido
-            {' '}
-            {deliveryNumber}
-          </p>
-          <p className="card text-primary text-center">{ salesDate }</p>
-          <p className="card text-primary text-center">{ status }</p>
-          <button type="button" className="btn btn-warning btn-sm">
-            <h6 className="fs-6">PREPARAR PEDIDO</h6>
-          </button>
-          <button type="button" className="btn btn-success btn-sm">
-            <h6 className="fs-6">PREPARAR PEDIDO</h6>
-          </button>
-        </div>
+        <DetailsHeader data={ data } />
         <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
           <p>Item</p>
           <p>Descrição</p>
@@ -60,7 +39,7 @@ function DetailsCard({ data }) {
             </p>
           </div>
         ))}
-        <div className="">
+        <div className="text-end">
           Total:
           { ' ' }
           R$
@@ -74,6 +53,7 @@ function DetailsCard({ data }) {
 
 DetailsCard.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     role: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     deliveryNumber: PropTypes.string.isRequired,
