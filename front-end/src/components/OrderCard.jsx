@@ -11,31 +11,31 @@ function SalesCard(props) {
     <div className="card card-body bg-primary mb-3">
       <p
         className="card"
-        id={ `${role}_orders__element-delivery-status-${id}` }
+        data-testid={ `${role}_orders__element-delivery-status-${id}` }
       >
         {status}
       </p>
       <p
         className="card"
-        id={ `${role}_orders__element-order-id-${id}` }
+        data-testid={ `${role}_orders__element-order-id-${id}` }
       >
         {deliveryNumber}
       </p>
       <p
         className="card"
-        id={ `${role}_orders__element-card-address-${id}` }
+        data-testid={ `${role}_orders__element-card-address-${id}` }
       >
         {deliveryAddress}
       </p>
       <p
         className="card"
-        id={ `${role}_orders__element-card-price-${id}` }
+        data-testid={ `${role}_orders__element-card-price-${id}` }
       >
         {totalPrice}
       </p>
       <p
         className="card"
-        id={ `${role}_orders__element-order-date-${id}` }
+        data-testid={ `${role}_orders__element-order-date-${id}` }
       >
         {salesDate}
       </p>
