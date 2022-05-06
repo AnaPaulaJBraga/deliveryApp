@@ -6,10 +6,10 @@ import api from '../services/api';
 function SalesOrder() {
   const [sales, setSales] = useState([]);
   const role = 'sales';
-  const { id } = JSON.parse(localStorage.getItem('userData'));
+  const { id } = JSON.parse(localStorage.getItem('user'));
 
   async function getSales() {
-    const { token } = JSON.parse(localStorage.getItem('userData'));
+    const { token } = JSON.parse(localStorage.getItem('user'));
     const response = await api.get(`/sale/${id}`, {
       headers: {
         Authorization: token,
@@ -42,7 +42,7 @@ function SalesOrder() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar pageName="Pedidos" />
       {
         sales.map((sale) => (
           <OrderCard
