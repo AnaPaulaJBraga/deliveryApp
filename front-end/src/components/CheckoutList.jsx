@@ -1,17 +1,27 @@
 import React, { useEffect } from 'react';
 
 function CheckoutList() {
-//   const [produtos, setProdutos] = useState([]);
-//   const [totalPrice, setTotalPrice] = useState(0);
+  const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    // pegar no localstorage 'carrinho' ??
-    // setTotalPrice(price);?
-    // setProdutos(pedidos);?
+    const cartItem = JSON.parse(localStorage.getItem('cartItem'));// pega os produtos do carrinho
+    const cartData = JSON.parse(localStorage.getItem('cartData'));// pega o valor
+    setTotalPrice(cartData.replace('.', ','));
+    setProducts(cartItem);
   }, []);
 
-  const handleRemove = () => {
+  const handleRemove = (e) => {
+    const filter = products.filter((prod) => prod.id !== Number(e.target.id));
+    const total = filter
+      .reduce((acc, { price, itemQty }) => (price * itemQty) + acc, 0);
+    const finalPrice = total.toFixed(2).replace('.', ',');
+    setProducts(filter);
+    setTotalPrice(finalPrice);
+    localStorage.setItem('cartItem', JSON.stringify(filter));// atualiza produtos
+    localStorage.setItem('cartData', JSON.stringify(finalPrice));// atualiza valor
   };
+  // tem que somar novamente e atualizar valor se for removido algum item
 
   return (
     <div>
@@ -28,7 +38,7 @@ function CheckoutList() {
           </tr>
         </thead>
         <tbody>
-          {produtos.map(({ id, price, name, itemQty }, it) => (
+          {products.map(({ id, price, name, itemQty }, it) => (
             <tr key={ it }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${it}` }
@@ -53,7 +63,7 @@ function CheckoutList() {
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${it}` }
               >
-                {(price * quantity).toFixed(2).replace('.', ',')}
+                {(price * itemQty).toFixed(2).replace('.', ',')}
               </td>
               <td>
                 <button
