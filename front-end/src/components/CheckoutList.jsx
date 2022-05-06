@@ -28,7 +28,7 @@ function CheckoutList() {
           </tr>
         </thead>
         <tbody>
-          {produtos.map(({ id, price, name, quantity }, it) => (
+          {produtos.map(({ id, price, name, itemQty }, it) => (
             <tr key={ it }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${it}` }
@@ -43,17 +43,17 @@ function CheckoutList() {
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${it}` }
               >
-                {quantity}
+                {itemQty}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${it}` }
               >
-                {price}
+                {price.replace('.', ',')}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${it}` }
               >
-                {(price * quantity).toFixed(2)}
+                {(price * quantity).toFixed(2).replace('.', ',')}
               </td>
               <td>
                 <button
