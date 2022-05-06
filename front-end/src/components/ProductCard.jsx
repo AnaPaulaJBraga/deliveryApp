@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
 import { setCart, removeItem } from './Cart';
@@ -7,24 +7,27 @@ function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
   // console.log('\n\n\n EVERY INFO: ', prodData);
   const [itemQty, setItemQty] = useState(0);
-  const prodPackage = { id, name, price: parseFloat(price), itemQty };
 
-  const handleInputChange = () => {
-    console.log('INPUT CHANGE!');
-    console.log('THIS IS PRODUCT PACKAGE', prodPackage);
-    setCart(prodPackage);
-  };
+  // const handleInputChange = () => {
+  //   console.log('input change detected! - THIS IS PRODUCT PACKAGE', prodPackage);
 
   const plusOneItem = () => {
     setItemQty(itemQty + 1);
-    handleInputChange();
   };
 
   const minusOneItem = () => {
-    if (itemQty < 1) removeItem(prodPackage);
+    if (itemQty === 0) return null;
+    if (itemQty === 1) {
+      removeItem(id);
+    }
     setItemQty(itemQty - 1);
-    handleInputChange();
   };
+
+  useEffect(() => {
+    if (itemQty < 1) return null;
+    setCart({ id, name, price: parseFloat(price), itemQty });
+  }, [itemQty]);
+  // it won't shut up about dependencies but you can just ignore it
 
   return (
     <div
@@ -57,7 +60,7 @@ function ProductCard({ prodData }) {
         data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
         value={ itemQty }
-        onChange={ handleInputChange }
+        // onChange={ handleInputChange }
       />
 
       <button
@@ -81,3 +84,5 @@ ProductCard.propTypes = {
 };
 
 export default ProductCard;
+
+// there's too much logic in this component, I feel. gonna have to separate it into other components later
