@@ -31,10 +31,11 @@ function ProductCard({ prodData, calcPrice }) {
     if (itemQty === 0 && loading) return null;
     if (itemQty === 0 && !loading) {
       removeItem(id);
-      console.log('SHOULD HAVE BEEN REMOVED ALREADY');
+      console.log('calculating the removal');
       return calcPrice();
     }
     setCart({ id, name, price: parseFloat(price), itemQty });
+    console.log('calculating the addition');
     return calcPrice();
   }, [itemQty]);
   // it won't shut up about dependencies but you can just ignore it

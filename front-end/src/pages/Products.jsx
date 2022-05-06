@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -43,19 +43,20 @@ function Products() {
   function checkoutField() {
     return (
       <footer className="checkoutFooter">
-        <Link to="/customer/checkout">
-          <button
-            // data-testid="customer_products__button-cart"
-            data-testid="customer_products__button-cart"
-            type="button"
-            disabled={ parseInt(finalPrice, 10) === 0 }
-          >
-            Checkout~
-            <h2 data-testid="customer_products__checkout-bottom-value">
-              { moneyToString(finalPrice) }
-            </h2>
-          </button>
-        </Link>
+        {/* <Link to="/customer/checkout"> */}
+        <button
+          // data-testid="customer_products__button-cart"
+          data-testid="customer_products__button-cart"
+          type="button"
+          disabled={ parseInt(finalPrice, 10) === 0 }
+          onClick={ () => Navigate('/customer/products') }
+        >
+          Checkout~
+          <h2 data-testid="customer_products__checkout-bottom-value">
+            { moneyToString(finalPrice) }
+          </h2>
+        </button>
+        {/* </Link> */}
       </footer>
     );
     //  Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00
@@ -66,7 +67,7 @@ function Products() {
   useEffect(() => {
     fetchProducts();
     calculatePrice();
-  }, [fetchProducts]);
+  }, []);
 
   // if (load) return <p> LOADING </p>;
   return (
