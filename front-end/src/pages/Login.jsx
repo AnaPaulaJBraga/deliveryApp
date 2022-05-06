@@ -29,13 +29,13 @@ function Login() {
 
       const userData = {
         id: response.data.userLogged.id,
-        nome: response.data.userLogged.name,
+        name: response.data.userLogged.name,
         email: response.data.userLogged.email,
         role: response.data.userLogged.role,
         token: response.data.accessToken,
       };
 
-      localStorage.userData = JSON.stringify(userData);
+      localStorage.user = JSON.stringify(userData);
 
       if (response.data.userLogged.role === 'customer') {
         navigate('/products');
