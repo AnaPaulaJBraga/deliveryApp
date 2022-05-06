@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -8,8 +8,9 @@ import { getCart } from '../components/Cart';
 
 function Products() {
   // const [load, setLoad] = useState(true);
+  const defaultPrice = 0;
   const [myProds, setProds] = useState([]);
-  const [finalPrice, setPrice] = useState('0,00');
+  const [finalPrice, setPrice] = useState(defaultPrice.toFixed(2));
 
   async function fetchProducts() {
     const response = await api.get('products');
@@ -28,20 +29,22 @@ function Products() {
       .reduce((prevVal, currVal) => prevVal + currVal);
     return setPrice(calcPrice.toFixed(2));
   }
+  // Não estou conseguindo imaginar como fazer essa função acontecer cada vez que o carrinho é atualizado...
 
   function checkoutField() {
     return (
-      <footer>
-        <button
-          type="button"
+      <footer className="checkoutFooter">
+        <a
+          href="/checkout"
           data-testid="customer_products__button-cart"
         >
-          <Link to="/checkout">CHECKOUT</Link>
-        </button>
-        <p data-testid="customer_products__checkout-bottom-value">
+          {/* Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00 */}
+          Checkout~
+        </a>
+        <h2 data-testid="customer_products__checkout-bottom-value">
           R$
           { finalPrice }
-        </p>
+        </h2>
       </footer>
     );
     // Ele consta como footer mas eu coloquei no topo da pagina pra ficar mais facil de acessar ele durante o desenvolvimento

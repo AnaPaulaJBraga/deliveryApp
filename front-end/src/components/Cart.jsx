@@ -18,6 +18,7 @@ export const setCart = (item) => {
   const duplicateCheck = myCart.filter((product) => product.id !== item.id);
   const newCart = [...duplicateCheck, item];
   localStorage.setItem('cartData', JSON.stringify(newCart));
+  // CALL IN PRICE CALC HERE
   // console.log('added to the cart!');
 };
 
