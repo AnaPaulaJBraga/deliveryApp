@@ -5,29 +5,35 @@ import { setCart, removeItem } from './Cart';
 
 function ProductCard({ prodData }) {
   const { id, name, price, urlImage } = prodData;
-  // console.log('\n\n\n EVERY INFO: ', prodData);
   const [itemQty, setItemQty] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // const handleInputChange = () => {
-  //   console.log('input change detected! - THIS IS PRODUCT PACKAGE', prodPackage);
-
-  const plusOneItem = () => {
-    setItemQty(itemQty + 1);
+  const handleInputQtyChange = ({ target: { value } }) => {
+    const parsedValue = parseInt(value, 10);
+    if (value === '' || parsedValue === 0) {
+      return setItemQty(0);
+    }
+    if (value.isNaN) return null;
+    return setItemQty(parsedValue);
   };
+
+  const plusOneItem = () => setItemQty(itemQty + 1);
 
   const minusOneItem = () => {
     if (itemQty === 0) return null;
-    if (itemQty === 1) {
-      removeItem(id);
-    }
-    setItemQty(itemQty - 1);
+    return setItemQty(itemQty - 1);
   };
 
   useEffect(() => {
-    if (itemQty < 1) return null;
-    setCart({ id, name, price: parseFloat(price), itemQty });
+    if (itemQty === 0 && loading) return null;
+    if (itemQty === 0 && !loading) return removeItem(id);
+    return setCart({ id, name, price: parseFloat(price), itemQty });
   }, [itemQty]);
   // it won't shut up about dependencies but you can just ignore it
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   return (
     <div
@@ -58,9 +64,9 @@ function ProductCard({ prodData }) {
 
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="number"
+        type="text"
         value={ itemQty }
-        // onChange={ handleInputChange }
+        onChange={ handleInputQtyChange }
       />
 
       <button
@@ -76,7 +82,7 @@ function ProductCard({ prodData }) {
 
 ProductCard.propTypes = {
   prodData: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
     urlImage: PropTypes.string,

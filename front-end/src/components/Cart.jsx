@@ -12,11 +12,13 @@ export const getCart = () => {
 export const setCart = (item) => {
   const myCart = getCart();
   if (myCart.length < 1) {
+    console.log('added first item to cart!');
     return localStorage.setItem('cartData', JSON.stringify([item]));
   }
   const duplicateCheck = myCart.filter((product) => product.id !== item.id);
   const newCart = [...duplicateCheck, item];
   localStorage.setItem('cartData', JSON.stringify(newCart));
+  console.log('added to the cart!');
 };
 
 export const removeItem = (id) => {
