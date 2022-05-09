@@ -5,6 +5,6 @@ const saleRouter = Router();
 
 saleRouter
   .get('/sale/:id', getById)
-  .post('/sale', create);;
+  .post('/sale', create);
 
 module.exports = saleRouter;

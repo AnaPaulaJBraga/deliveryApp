@@ -14,7 +14,7 @@ const create = async (req, res) => {
   const id = await sale.create(saleData);
 
   res.status(201).json(id);
-}
+};
 
 module.exports = {
   getById,

@@ -14,13 +14,13 @@ const create = async (saleData) => {
   const { id } = await Sale.create(sale);
   
   await Promise.all(
-    saleProduct.map(async (sale) => {
-      await SalesProduct.create(sale);
-    })
+    saleProduct.map(async (saleInfo) => {
+      await SalesProduct.create(saleInfo);
+    }),
   );
 
   return id;
-}
+};
 
 module.exports = {
   getById,
