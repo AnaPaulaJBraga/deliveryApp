@@ -3,6 +3,7 @@ import DetailsCard from '../components/DetailsCard';
 import Navbar from '../components/NavBar';
 
 function SalesDetails() {
+  // api get saledetails/:id(do produto)
   const [dataOrder] = useState({
     id: 2,
     role: 'seller',

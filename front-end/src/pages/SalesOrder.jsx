@@ -16,6 +16,28 @@ function SalesOrder() {
       },
     });
 
+    // Exemplo da resposta do BD
+    // response = {
+    //   id da venda
+    //   id do vendedor (esse que tem que ser utilizado aqui)
+    //   id do comprardor
+    //   status: 'Pendente',
+    //   deliveryNumber: '12345',
+    //   deliveryAddress: ' ',
+    //   totalPrice: 'R$ 10,00',
+    //   salesDate: '01/01/2020',
+    //   orders[
+    //     {
+    //       id do produto
+    //       nome do produto
+    //       preco do produto
+    //       saleProducts: {
+    //         quantidade comprada
+    //       }
+    //     }
+    //   ]
+    // }
+
     const data = [
       {
         status: 'Pendente',
