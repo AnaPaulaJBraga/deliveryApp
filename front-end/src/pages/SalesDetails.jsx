@@ -23,7 +23,6 @@ function SalesDetails() {
         quantity: 3,
       },
     ],
-
   });
 
   // async function getDetailsOrder() {
