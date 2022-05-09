@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function CheckoutList() {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const cartItem = JSON.parse(localStorage.getItem('cartItem'));// pega os produtos do carrinho atualizado
-    const cartData = JSON.parse(localStorage.getItem('cartData'));// pega o valor
-    setTotalPrice(cartData.replace('.', ','));
-    setProducts(cartItem);
+    const cartData = JSON.parse(localStorage.getItem('cartData'));// pega os produtos do carrinho atualizado
+    const orders = JSON.parse(localStorage.getItem('orders'));// pega o valor
+    setTotalPrice(orders);
+    setProducts(cartData);
   }, []);
 
-  const handleRemove = (e) => {
-    const filter = products.filter((prod) => prod.id !== Number(e.target.id));
+  const handleRemove = ({ target }) => {
+    const filter = products.filter((prod) => prod.id !== Number(target.id));
     const total = filter
       .reduce((acc, { price, itemQty }) => (price * itemQty) + acc, 0);
     const finalPrice = total.toFixed(2).replace('.', ',');
     setProducts(filter);
     setTotalPrice(finalPrice);
-    localStorage.setItem('cartItem', JSON.stringify(filter));// atualiza produtos
-    localStorage.setItem('cartData', JSON.stringify(finalPrice));// atualiza valor
+    localStorage.setItem('cartData', JSON.stringify(filter));// atualiza produtos
+    localStorage.setItem('orders', JSON.stringify(finalPrice));// atualiza valor
   };
   // tem que somar novamente e atualizar valor se for removido algum item
 
@@ -58,12 +58,12 @@ function CheckoutList() {
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${it}` }
               >
-                {price.replace('.', ',')}
+                {price}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${it}` }
               >
-                {(price * itemQty).toFixed(2).replace('.', ',')}
+                {(price * itemQty)}
               </td>
               <td>
                 <button

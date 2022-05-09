@@ -1,14 +1,14 @@
 import React from 'react';
-// import Navbar from '../components/NavBar';
-import CheckoutDelivery from '../components/CheckoutDelivery';
 import CheckoutList from '../components/CheckoutList';
+import CheckoutDelivery from '../components/CheckoutDelivery';
 
 function Checkout() {
   return (
     <div>
-      {/* <NavBar /> */}
+
       <CheckoutList />
       <CheckoutDelivery />
+
     </div>
   );
 }
