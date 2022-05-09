@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       field: 'sale_id',
     },
-    productId: { 
+    productId: {
       type: DataTypes.INTEGER,
       field: 'product_id'
     },
