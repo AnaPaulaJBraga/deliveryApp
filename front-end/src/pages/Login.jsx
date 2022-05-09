@@ -39,6 +39,8 @@ function Login() {
 
       if (response.data.userLogged.role === 'customer') {
         navigate('/products');
+      } else if (response.data.userLogged.role === 'administrator') {
+        navigate('/admin/manage');
       }
       navigate('/seller/orders');
     } catch (error) {

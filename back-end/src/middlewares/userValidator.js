@@ -2,7 +2,7 @@ const { loginSchema, registerSchema } = require('../schema/userchema');
 
 const loginValidator = async (req, res, next) => {
   const user = req.body;
-
+  console.log(req.body);
   const validate = await loginSchema.validate(user);
 
   if (validate.error !== undefined) {
