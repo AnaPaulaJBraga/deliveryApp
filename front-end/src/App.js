@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import SalesOrder from './pages/SalesOrder';
 import SalesDetails from './pages/SalesDetails';
 import CustomerOrder from './pages/cutomer/CustomerOrder';
+import CustomerOrderDetails from './pages/cutomer/CustomerOrderDetails';
 
 // teste
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
         <Route path="/customer/orders" element={ <CustomerOrder /> } />
+        <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
         <Route path="/seller/orders" element={ <SalesOrder /> } />
         <Route path="/seller/orders/:id" element={ <SalesDetails /> } />
       </Routes>
