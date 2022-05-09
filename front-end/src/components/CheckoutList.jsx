@@ -5,7 +5,7 @@ function CheckoutList() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const cartItem = JSON.parse(localStorage.getItem('cartItem'));// pega os produtos do carrinho
+    const cartItem = JSON.parse(localStorage.getItem('cartItem'));// pega os produtos do carrinho atualizado
     const cartData = JSON.parse(localStorage.getItem('cartData'));// pega o valor
     setTotalPrice(cartData.replace('.', ','));
     setProducts(cartItem);
