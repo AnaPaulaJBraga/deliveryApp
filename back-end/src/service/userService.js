@@ -15,12 +15,6 @@ const login = async (user) => {
 
   const accessToken = token({ email, password });
 
-  if (userLogged.role === 'administrator') {
-    const users = await User.findAll();
-
-    return { accessToken, users };
-  }
-
   return { accessToken, userLogged };
 };
 
@@ -36,7 +30,7 @@ const register = async (userInfo) => {
     const response = await User.create(hashPasswordUser);
 
     const accessToken = token({ email, password });
-
+    console.log(await response);
     return { accessToken, response };
   }
 
