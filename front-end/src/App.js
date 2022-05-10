@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AdminManager from './pages/AdminManager';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
+        <Route exact path="/admin/manage" element={ <AdminManager /> } />
       </Routes>
     </BrowserRouter>
   );

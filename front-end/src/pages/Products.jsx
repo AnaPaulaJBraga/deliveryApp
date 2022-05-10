@@ -70,14 +70,14 @@ function Products() {
 
   // if (load) return <p> LOADING </p>;
   return (
-    <div>
+    <main>
       PRODUCTS
       <Navbar pageName="Produtos" />
       { checkoutField() }
       <span className='="productList'>
         { myProds }
       </span>
-    </div>
+    </main>
   );
 }
 

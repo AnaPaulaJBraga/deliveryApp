@@ -40,7 +40,7 @@ function Login() {
       if (response.data.userLogged.role === 'customer') {
         navigate('/products');
       } else if (response.data.userLogged.role === 'administrator') {
-        navigate('/admin/manage');
+        return navigate('/admin/manage');
       }
       navigate('/seller/orders');
     } catch (error) {
@@ -49,7 +49,7 @@ function Login() {
   }
 
   return (
-    <>
+    <main>
       <h1>Delivery App</h1>
       <form onSubmit={ onSubmit }>
         <label htmlFor="email">
@@ -97,7 +97,7 @@ function Login() {
           )
         }
       </form>
-    </>
+    </main>
   );
 }
 
