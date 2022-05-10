@@ -1,53 +1,19 @@
 import React, { useState } from 'react';
 import DetailsCard from '../components/DetailsCard';
 import Navbar from '../components/NavBar';
+import dataMocked from '../data/dataMocked';
 
 function SalesDetails() {
   // api get saledetails/:id(do produto)
-  const [dataOrder] = useState({
-    id: 2,
-    role: 'seller',
-    status: 'Pendente',
-    deliveryNumber: '12345',
-    salesDate: '01/01/2020',
-    order: [
-      {
-        id: 1,
-        name: 'Produto 1',
-        price: 10,
-        quantity: 1,
-      },
-      {
-        id: 2,
-        name: 'Produto 2',
-        price: 10,
-        quantity: 3,
-      },
-    ],
-  });
+  const [orderId] = useState(Number(window.location.pathname.split('/')[3]));
+  const [dataOrder] = useState(dataMocked.find((item) => item.id === orderId));
+  const [role] = useState('sales');
 
   // async function getDetailsOrder() {
-  //   const data = {
-  //     status: 'Pendente',
-  //     deliveryNumber: '12345',
-  //     salesDate: '01/01/2020',
-  //     order: [
-  //       {
-  //         id: 1,
-  //         name: 'Produto 1',
-  //         price: 'R$ 10,00',
-  //         quantity: 1,
-  //       },
-  //       {
-  //         id: 2,
-  //         name: 'Produto 2',
-  //         price: 'R$ 10,00',
-  //         quantity: 1,
-  //       },
-  //     ],
-  //   };
-
-  //   setDataOrder(data);
+  //   const findOrder = dataOrder.find(item => item.id === orderId);
+  //   console.log('findOrder:', findOrder);
+  //   setOrder(findOrder);
+  //   // setDataOrder(data);
   // }
 
   // useEffect(() => {
@@ -57,7 +23,7 @@ function SalesDetails() {
   return (
     <div>
       <Navbar pageName="Pedidos" />
-      <DetailsCard data={ dataOrder } />
+      <DetailsCard data={ dataOrder } role={ role } />
     </div>
   );
 }
