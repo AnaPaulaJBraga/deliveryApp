@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
-import SalesOrder from './pages/SalesOrder';
-import SalesDetails from './pages/SalesDetails';
-import CustomerOrder from './pages/cutomer/CustomerOrder';
-import CustomerOrderDetails from './pages/cutomer/CustomerOrderDetails';
+import SalesOrder from './pages/sales/SalesOrder';
+import SalesDetails from './pages/sales/SalesDetails';
+import CustomerOrder from './pages/customer/CustomerOrder';
+import CustomerOrderDetails from './pages/customer/CustomerOrderDetails';
 
 // teste
 function App() {

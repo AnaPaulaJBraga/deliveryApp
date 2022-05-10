@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import DetailsCard from '../components/DetailsCard';
-import Navbar from '../components/NavBar';
-import dataMocked from '../data/dataMocked';
+import DetailsCard from '../../components/DetailsCard';
+import Navbar from '../../components/NavBar';
+import dataMocked from '../../data/dataMocked';
 
 function SalesDetails() {
   // api get saledetails/:id(do produto)

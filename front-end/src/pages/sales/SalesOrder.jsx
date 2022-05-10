@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/NavBar';
-import OrderCard from '../components/OrderCard';
-import api from '../services/api';
-import dataMocked from '../data/dataMocked';
+import Navbar from '../../components/NavBar';
+import OrderCard from '../../components/OrderCard';
+import api from '../../services/api';
+import dataMocked from '../../data/dataMocked';
 
 function SalesOrder() {
   const [sales, setSales] = useState([]);
