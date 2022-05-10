@@ -7,7 +7,7 @@ function SalesCard(props) {
     id, role, status,
     deliveryNumber, totalPrice, salesDate } = props;
 
-  const PATH = (role === 'sales') ? '/seller/orders' : '/customer/orders';
+  const PATH = (role === 'seller') ? '/seller/orders' : '/customer/orders';
 
   return (
     <a className="card card-body bg-primary mb-3" href={ `${PATH}/${id}` }>
@@ -24,7 +24,7 @@ function SalesCard(props) {
         {deliveryNumber}
       </p>
       {
-        (role === 'sales')
+        (role === 'seller')
           ? <Address data={ props } /> : null
       }
       <p
