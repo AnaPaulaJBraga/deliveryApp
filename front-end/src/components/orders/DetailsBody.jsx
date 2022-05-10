@@ -30,7 +30,7 @@ function DetailsBody({ data, role }) {
           `${role}_order_details__element-order-table-quantity-${item.id}`
         }
       >
-        {item.quantity}
+        {item.saleProducts.quantity}
       </p>
       <p
         className="card text-primary text-center"
