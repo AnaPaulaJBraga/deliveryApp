@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     saleDate: {
       type: DataTypes.DATE,
       field: 'sale_date',
+      defaultValue: DataTypes.NOW,
     },
     status: DataTypes.STRING(50),
     userId: {
