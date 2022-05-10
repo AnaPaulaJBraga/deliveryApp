@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const PASSWORD_LENGTH = 6;
@@ -24,8 +24,13 @@ export default function AdmRegisterForm() {
     }
   }, [name, email, password, role]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      await api.post('adminregister', { name, email, password, role });
+    } catch (err) {
+      console.log('\nerror when doing an api.post', err);
+    }
   };
 
   return (

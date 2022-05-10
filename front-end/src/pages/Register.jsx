@@ -43,6 +43,7 @@ function Register() {
       // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
     } catch (error) {
+      console.log(error);
       setUser(error);
     }
   }

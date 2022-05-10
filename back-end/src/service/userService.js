@@ -37,7 +37,30 @@ const register = async (userInfo) => {
   return { code: 409, message: 'User already registered' };
 };
 
+const registerWithRole = async (userInfo) => {
+  const { name, email, password, role } = userInfo;
+  console.log('\n\n in register service. Heres the info:', name, email, password, role);
+  const user = await User.findOne({
+    where: { email },
+  });
+
+  if (!user) {
+    const hashPassword = md5(password);
+    const hashPasswordUser = { 
+      name, email, password: hashPassword, role,
+    };
+    const response = await User.create(hashPasswordUser);
+
+    const accessToken = token({ email, password });
+    console.log(await response);
+    return { accessToken, response };
+  }
+
+  return { code: 409, message: 'User already registered' };
+};
+
 module.exports = {
   login,
   register,
+  registerWithRole,
 };

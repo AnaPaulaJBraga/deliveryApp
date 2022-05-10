@@ -45,7 +45,6 @@ function Products() {
       <footer className="checkoutFooter">
         <Link to="/customer/checkout">
           <button
-            // data-testid="customer_products__button-cart"
             data-testid="customer_products__button-cart"
             type="button"
             disabled={ parseInt(finalPrice, 10) === 0 }
