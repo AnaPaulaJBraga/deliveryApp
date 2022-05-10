@@ -10,7 +10,6 @@ export default function AdmRegisterForm() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
-  // const [user, setUser] = useState({});
   const [disabled, setDisabled] = useState(true);
 
   // const navigate = useNavigate();
@@ -63,9 +62,13 @@ export default function AdmRegisterForm() {
           onChange={ ({ target }) => setPassword(target.value) }
         />
       </label>
-      <label data-testid="admin_manage__select-role" htmlFor="role">
+      <label htmlFor="role">
         Role
-        <select value={ role } onChange={ ({ target }) => setRole(target.value) }>
+        <select
+          value={ role }
+          data-testid="admin_manage__select-role"
+          onChange={ ({ target }) => setRole(target.value) }
+        >
           <option value="" selected disabled hidden>- - -</option>
           <option value="Customer">Customer</option>
           <option value="Seller">Seller</option>
