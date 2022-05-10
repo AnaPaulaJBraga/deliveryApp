@@ -7,8 +7,10 @@ function SalesCard(props) {
     id, role, status,
     deliveryNumber, totalPrice, salesDate } = props;
 
+  const PATH = (role === 'sales') ? '/seller/orders' : '/customer/orders';
+
   return (
-    <div className="card card-body bg-primary mb-3">
+    <a className="card card-body bg-primary mb-3" href={ `${PATH}/${id}` }>
       <p
         className="card text-primary text-center"
         data-testid={ `${role}_orders__element-delivery-status-${id}` }
@@ -37,7 +39,7 @@ function SalesCard(props) {
       >
         {salesDate}
       </p>
-    </div>
+    </a>
   );
 }
 
