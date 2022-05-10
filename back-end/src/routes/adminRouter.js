@@ -5,6 +5,6 @@ const { registerWithRoleValidator } = require('../middlewares/userValidator');
 const adminRouter = Router();
 
 adminRouter
-  .post('/adminregister', registerWithRoleValidator, registerWithRole);
+  .post('/admin/manage', registerWithRoleValidator, registerWithRole);
 
 module.exports = adminRouter;

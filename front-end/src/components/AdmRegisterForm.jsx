@@ -31,7 +31,7 @@ export default function AdmRegisterForm() {
       const { token } = await getUserData();
       await api
         .post(
-          'adminregister',
+          '/admin/manage',
           { name, email, password, role }, { headers: { Authorization: token } },
         );
     } catch (err) {
