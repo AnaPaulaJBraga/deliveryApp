@@ -9,19 +9,20 @@ export default function AdmRegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('Customer');
   const [disabled, setDisabled] = useState(true);
 
   // const navigate = useNavigate();
 
   useEffect(() => {
-    if (emailRegex.test(email) && password.length >= PASSWORD_LENGTH
+    if (emailRegex.test(email)
+    && password.length >= PASSWORD_LENGTH
     && name.length >= MIN_NAME) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [name, email, password]);
+  }, [name, email, password, role]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -69,16 +70,16 @@ export default function AdmRegisterForm() {
           data-testid="admin_manage__select-role"
           onChange={ ({ target }) => setRole(target.value) }
         >
-          <option value="" selected disabled hidden>- - -</option>
-          <option value="Customer">Customer</option>
+          {/* <option value="" selected disabled hidden>- - -</option> */}
+          <option selected value="Customer">Customer</option>
           <option value="Seller">Seller</option>
-          <option value="Admin">Admin</option>
+          {/* <option value="Admin">Admin</option> */}
         </select>
       </label>
       <button
-        data-testid="admin_manage__button-register"
         type="submit"
         disabled={ disabled }
+        data-testid="admin_manage__button-register"
       >
         CADASTRAR
       </button>
