@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import getUserData from './LocalUserData';
 
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const PASSWORD_LENGTH = 6;
@@ -27,7 +28,12 @@ export default function AdmRegisterForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await api.post('adminregister', { name, email, password, role });
+      const { token } = await getUserData();
+      await api
+        .post(
+          'adminregister',
+          { name, email, password, role }, { headers: { Authorization: token } },
+        );
     } catch (err) {
       console.log('\nerror when doing an api.post', err);
     }

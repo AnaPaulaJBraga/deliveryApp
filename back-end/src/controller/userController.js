@@ -20,6 +20,7 @@ const register = async (req, res) => {
 
 const registerWithRole = async (req, res) => {
   const userInfo = req.body;
+  console.log('\n\n in Controller: UserInfo!', userInfo);
   const result = await user.register(userInfo);
 
   if (result.code) return res.status(result.code).json({ message: result.message });
