@@ -7,7 +7,7 @@ function Address({ data }) {
     <div>
       <p
         className="card text-primary text-center"
-        data-testid={ `${role}_orders__element-card-address-${id}` }
+        data-testid={ `seller_orders__element-card-address-${id}` }
       >
         {deliveryAddress}
       </p>
