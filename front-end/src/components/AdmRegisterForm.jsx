@@ -29,6 +29,7 @@ export default function AdmRegisterForm() {
     event.preventDefault();
     try {
       const { token } = await getUserData();
+      console.log('\n\n\n THIS IS THE TOKEN:', token);
       await api
         .post(
           '/admin/manage',

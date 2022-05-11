@@ -5,7 +5,7 @@ const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8');
 
 const verifyAuthorization = (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('this is the authorization:', authorization);
+  console.log('\n\nthis is the authorization:', authorization);
 
   if (!authorization) return res.status(401).json({ message: 'Token not found' });
 
