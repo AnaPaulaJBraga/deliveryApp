@@ -49,11 +49,11 @@ const registerWithRole = async (userInfo) => {
     const hashPasswordUser = { 
       name, email, password: hashPassword, role,
     };
-    const response = await User.create(hashPasswordUser);
+    await User.create(hashPasswordUser);
 
-    const accessToken = token({ email, password });
-    console.log(await response);
-    return { accessToken, response };
+    // const accessToken = token({ email, password });
+    // console.log('awaiting creation: ', await response);
+    return { code: 201, message: 'ok' };
   }
 
   return { code: 409, message: 'User already registered' };

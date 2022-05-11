@@ -83,8 +83,8 @@ export default function AdmRegisterForm() {
           onChange={ ({ target }) => setRole(target.value) }
         >
           {/* <option value="" selected disabled hidden>- - -</option> */}
-          <option selected value="Customer">Customer</option>
-          <option value="Seller">Seller</option>
+          <option selected value="customer">Customer</option>
+          <option value="seller">Seller</option>
           {/* <option value="Admin">Admin</option> */}
         </select>
       </label>
