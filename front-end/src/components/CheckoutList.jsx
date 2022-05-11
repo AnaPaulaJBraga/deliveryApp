@@ -7,6 +7,7 @@ function CheckoutList() {
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cartData'));// pega os produtos do carrinho atualizado
     const orders = JSON.parse(localStorage.getItem('orders'));// pega o valor
+    // console.log(orders);
     setTotalPrice(orders);
     setProducts(cartData);
   }, []);

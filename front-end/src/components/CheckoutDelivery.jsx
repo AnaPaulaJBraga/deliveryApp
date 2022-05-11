@@ -6,27 +6,29 @@ function CheckoutDelivery() {
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [sellerList, setSellerList] = useState([]);
-  const [sellerId, setSellerId] = useState(0);
+  const [sellerId, setSellerId] = useState(1);
   const [cart, setCart] = useState([]);
   const [userId, setUserId] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  // const [sale, setSale] = useState(
-  //   {
-  //     userId: 1,
-  //     sellerId: 1,
-  //     totalPrice: 1,
-  //     deliveryAddress: '',
-  //     deliveryNumber: '',
-  //     cart: [],
-  //   },
-  // );
+  const [token, setToken] = useState('');
+  const [sale, setSale] = useState(
+    {
+      userId: 1,
+      sellerId: 1,
+      totalPrice: 1,
+      deliveryAddress: '',
+      deliveryNumber: '',
+      cart: [],
+    },
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cartData')));
     setUserId(JSON.parse(localStorage.getItem('user')).id);
-    setTotalPrice(Number(JSON.parse(localStorage.getItem('orders'))));
+    setTotalPrice((JSON.parse(localStorage.getItem('orders')))); // está vindo null
+    setToken(JSON.parse(localStorage.getItem('user')).token);
   }, []);
 
   useEffect(() => {
@@ -42,19 +44,23 @@ function CheckoutDelivery() {
     );
   }, [userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, cart]);
 
+  async function getSellers() {
+    const sellers = await api.get('users/seller');
+    console.log(sellers);
+    setSellerList(sellers.data);
+    setSellerId(sellers.data[0].id);
+  }
+
   useEffect(() => {
-    api.get('http://localhost:3001/getAll')// confirmar rota!!!!
-      .then(({ data }) => {
-        const filter = data.filter(data.role === 'seller');
-        setSellerList(filter);
-        setSellerId(filter[0].id);
-      });
+    getSellers();
   }, []);
 
   const sendOrder = () => {
-    // post de sale no banco de dados ??
-    // tem que pegar o id da sale que vai ser criado no bd
-    navigate(`/customer/orders/${id}`);
+    // console.log(sale);
+    api.post('sale', sale, { headers: { Authorization: token } })
+      .then(({ data: { id } }) => {
+        navigate(`/customer/orders/${id}`);
+      });
   };
 
   const handleSeller = ({ target }) => {
