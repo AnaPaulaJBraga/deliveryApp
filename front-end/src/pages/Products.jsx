@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import '../styles/pages/products.css';
 import { getCart } from '../components/Cart';
 import moneyToString from '../utilities/moneyStringConvert';
+import getUserData from '../components/LocalUserData';
 
 function Products() {
   // const [load, setLoad] = useState(true);
@@ -14,7 +15,7 @@ function Products() {
   const [finalPrice, setPrice] = useState(defaultPrice.toFixed(2));
 
   function calculatePrice() {
-    console.log('calculating price');
+    // console.log('calculating price');
     const DEFAULT_PRICE = 0;
     const myCart = getCart();
     if (myCart.length < 1) return setPrice(DEFAULT_PRICE.toFixed(2));
@@ -25,7 +26,9 @@ function Products() {
   }
 
   async function fetchProducts() {
-    const response = await api.get('products');
+    const { token } = getUserData();
+    const response = await api
+      .get('products', { headers: { Authorization: token } });
     const allProducts = response.data
       .map((prod) => (
         <ProductCard
@@ -38,14 +41,12 @@ function Products() {
     // setLoad(false);
     return allProducts;
   }
-  // SHUT UP LINT
 
   function checkoutField() {
     return (
       <footer className="checkoutFooter">
         <Link to="/customer/checkout">
           <button
-            // data-testid="customer_products__button-cart"
             data-testid="customer_products__button-cart"
             type="button"
             disabled={ parseInt(finalPrice, 10) === 0 }
@@ -70,14 +71,14 @@ function Products() {
 
   // if (load) return <p> LOADING </p>;
   return (
-    <div>
+    <main>
       PRODUCTS
       <Navbar pageName="Produtos" />
       { checkoutField() }
       <span className='="productList'>
         { myProds }
       </span>
-    </div>
+    </main>
   );
 }
 
