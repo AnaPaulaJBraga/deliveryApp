@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function DetailsBody(props) {
-  const { data } = props;
+function DetailsBody({ data, role }) {
   const {
-    role,
-    order,
+    orders,
   } = data;
 
-  return order.map((item) => (
+  return orders.map((item) => (
     <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" key={ item.id }>
       <p
         className="card text-primary text-center"
@@ -32,7 +30,7 @@ function DetailsBody(props) {
           `${role}_order_details__element-order-table-quantity-${item.id}`
         }
       >
-        {item.quantity}
+        {item.saleProducts.quantity}
       </p>
       <p
         className="card text-primary text-center"
@@ -48,7 +46,7 @@ function DetailsBody(props) {
           `${role}_order_details__element-order-table-sub-total-${item.id}`
         }
       >
-        {`R$ ${(item.quantity * item.price).toFixed(2)}`}
+        {`R$ ${(item.saleProducts.quantity * item.price).toFixed(2)}`}
       </p>
     </div>
   ));
@@ -56,14 +54,16 @@ function DetailsBody(props) {
 
 DetailsBody.propTypes = {
   data: PropTypes.shape({
-    role: PropTypes.string.isRequired,
-    order: PropTypes.arrayOf(PropTypes.shape({
+    orders: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
+      saleProducts: PropTypes.shape({
+        quantity: PropTypes.number.isRequired,
+      }).isRequired,
     })).isRequired,
   }).isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default DetailsBody;

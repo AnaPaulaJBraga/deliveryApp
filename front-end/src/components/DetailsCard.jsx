@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DetailsHeader from './DetailsHeader';
-import DetailsBody from './DetailsBody';
+import DetailsHeader from './orders/DetailsHeader';
+import DetailsBody from './orders/DetailsBody';
 
-function DetailsCard({ data }) {
-  const {
-    role,
-    order,
-  } = data;
-  const total = order.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+function DetailsCard({ data, role }) {
+  const { totalPrice } = data;
+  // console.log('detailsCard ===> ', data);
 
   return (
     <div>
       <h5>Detalhe do Pedido</h5>
       <div className="card card-body bg-primary mb-3">
-        <DetailsHeader data={ data } />
+        <DetailsHeader data={ data } role={ role } />
         <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
           <p>Item</p>
           <p>Descrição</p>
@@ -22,12 +19,12 @@ function DetailsCard({ data }) {
           <p>Valor Unitário</p>
           <p>Sub-total</p>
         </div>
-        <DetailsBody data={ data } />
+        <DetailsBody data={ data } role={ role } />
         <div
           className="text-end"
           data-testid={ `${role}_order_details__element-order-total-price` }
         >
-          { `R$ ${total.toFixed(2)}` }
+          { `R$ ${totalPrice}` }
         </div>
       </div>
     </div>
@@ -36,14 +33,9 @@ function DetailsCard({ data }) {
 
 DetailsCard.propTypes = {
   data: PropTypes.shape({
-    role: PropTypes.string.isRequired,
-    order: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
-    })).isRequired,
+    totalPrice: PropTypes.string.isRequired,
   }).isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default DetailsCard;
