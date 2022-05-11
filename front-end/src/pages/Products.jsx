@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import '../styles/pages/products.css';
 import { getCart } from '../components/Cart';
 import moneyToString from '../utilities/moneyStringConvert';
+import getUserData from '../components/LocalUserData';
 
 function Products() {
   const letsNavigate = useNavigate();
@@ -18,7 +19,7 @@ function Products() {
     letsNavigate('/customer/checkout');
   }
   function calculatePrice() {
-    console.log('calculating price');
+    // console.log('calculating price');
     const DEFAULT_PRICE = 0;
     const myCart = getCart();
     if (myCart.length < 1) return setPrice(DEFAULT_PRICE.toFixed(2));
@@ -29,7 +30,9 @@ function Products() {
   }
 
   async function fetchProducts() {
-    const response = await api.get('products');
+    const { token } = getUserData();
+    const response = await api
+      .get('products', { headers: { Authorization: token } });
     const allProducts = response.data
       .map((prod) => (
         <ProductCard
@@ -42,7 +45,6 @@ function Products() {
     // setLoad(false);
     return allProducts;
   }
-  // SHUT UP LINT
 
   function checkoutField() {
     return (
@@ -72,14 +74,14 @@ function Products() {
 
   // if (load) return <p> LOADING </p>;
   return (
-    <div className="container">
+    <main>
       PRODUCTS
       <Navbar pageName="Produtos" />
       <span className="productList">
         { myProds }
         { checkoutField() }
       </span>
-    </div>
+    </main>
   );
 }
 
