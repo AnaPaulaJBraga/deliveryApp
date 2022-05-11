@@ -10,16 +10,16 @@ function CheckoutDelivery() {
   const [cart, setCart] = useState([]);
   const [userId, setUserId] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [sale, setSale] = useState(
-    {
-      userId: 1,
-      sellerId: 1,
-      totalPrice: 1,
-      deliveryAddress: '',
-      deliveryNumber: '',
-      cart: [],
-    },
-  );
+  // const [sale, setSale] = useState(
+  //   {
+  //     userId: 1,
+  //     sellerId: 1,
+  //     totalPrice: 1,
+  //     deliveryAddress: '',
+  //     deliveryNumber: '',
+  //     cart: [],
+  //   },
+  // );
 
   const navigate = useNavigate();
 
