@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
+import Loading from '../../components/Loading';
 import DetailsCard from '../../components/DetailsCard';
 import dataMocked from '../../data/dataMocked';
 
 function CustomerOrderDetails() {
   // api get saledetails/:id(do produto)
+  const [isLoading, setIsLoading] = useState(true);
   const [orderId] = useState(Number(window.location.pathname.split('/')[3]));
-  const [dataOrder] = useState(dataMocked.find((item) => item.id === orderId));
+  const [dataOrder, setDataOrder] = useState([]);
   const [role] = useState('customer');
 
-  // async function getDataOrder() {
-  //   setDataOrder(dataMocked);
-  // }
+  async function getDataOrder() {
+    setDataOrder(dataMocked.find((item) => item.id === orderId));
+    setIsLoading(false);
+  }
 
-  // useEffect(() => {
-  //   getDataOrder();
-  // }, []);
+  useEffect(() => {
+    getDataOrder();
+  }, []);
 
   return (
     <div>
       <NavBar pageName="Pedidos" />
-      <DetailsCard role={ role } data={ dataOrder } />
+      {isLoading ? (<Loading />) : <DetailsCard role={ role } data={ dataOrder } /> }
     </div>
   );
 }
