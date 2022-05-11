@@ -5,6 +5,8 @@ import getUserData from './LocalUserData';
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const PASSWORD_LENGTH = 6;
 const MIN_NAME = 12;
+// const ERR_BAD_REQUEST = 401;
+// const USER_CREATED_STATUS = 201;
 
 export default function AdmRegisterForm() {
   const [email, setEmail] = useState('');
@@ -12,6 +14,8 @@ export default function AdmRegisterForm() {
   const [name, setName] = useState('');
   const [role, setRole] = useState('Customer');
   const [disabled, setDisabled] = useState(true);
+  const [resStatus, setResStatus] = useState('');
+  const [badRequest, setBadRequest] = useState(false);
 
   // const navigate = useNavigate();
 
@@ -25,20 +29,37 @@ export default function AdmRegisterForm() {
     }
   }, [name, email, password, role]);
 
+  useEffect(() => {
+    if (resStatus === 'ERR_BAD_REQUEST') return setBadRequest(true);
+    return setBadRequest(false);
+  }, [resStatus]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      console.log('TRYING TO CCREATE!');
       const { token } = await getUserData();
       console.log('\n\n\n THIS IS THE TOKEN:', token);
-      await api
+      const response = await api
         .post(
           '/admin/manage',
           { name, email, password, role }, { headers: { Authorization: token } },
         );
+      console.log('\n\n\nthis is the response', response);
+      setResStatus(response.code);
+      console.log('status when success: ', resStatus);
     } catch (err) {
+      setResStatus(err.code);
+      console.log('whats the status?', resStatus);
       console.log('\nerror when doing an api.post', err);
     }
   };
+
+  const invalidReqMessage = () => (
+    <div data-testid="admin_manage__element-invalid-register">
+      <h3>USUÁRIO JÁ EXISTE!</h3>
+    </div>
+  );
 
   return (
     <form onSubmit={ handleSubmit }>
@@ -95,6 +116,7 @@ export default function AdmRegisterForm() {
       >
         CADASTRAR
       </button>
+      { badRequest && invalidReqMessage()}
       {/* {
         user.message && (
           <span data-testid="common_register__element-invalid_register">
