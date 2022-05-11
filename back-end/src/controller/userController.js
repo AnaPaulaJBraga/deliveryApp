@@ -18,7 +18,14 @@ const register = async (req, res) => {
   res.status(201).json(result);
 };
 
+const getAll = async (req, res) => {
+  const response = await user.getAll();
+
+  res.status(200).json(response);
+};
+
 module.exports = {
   login,
   register,
+  getAll,
 };
