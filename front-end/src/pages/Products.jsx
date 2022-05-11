@@ -72,12 +72,12 @@ function Products() {
 
   // if (load) return <p> LOADING </p>;
   return (
-    <div>
+    <div className="container">
       PRODUCTS
       <Navbar pageName="Produtos" />
-      { checkoutField() }
-      <span className='="productList'>
+      <span className="productList">
         { myProds }
+        { checkoutField() }
       </span>
     </div>
   );

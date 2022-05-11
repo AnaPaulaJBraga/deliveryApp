@@ -73,7 +73,7 @@ function ProductCard({ prodData, calcPrice }) {
 
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="text"
+        type="tel"
         value={ itemQty }
         onChange={ handleInputQtyChange }
       />
