@@ -29,8 +29,15 @@ const registerWithRole = async (req, res) => {
   res.status(201).json({ message: 'user created' });
 };
 
+const getAll = async (req, res) => {
+  const response = await user.getAll();
+
+  res.status(200).json(response);
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
+  getAll,
 };

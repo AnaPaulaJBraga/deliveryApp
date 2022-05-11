@@ -4,6 +4,7 @@ const { User } = require('../database/models');
 
 const login = async (user) => {
   const { email, password } = user;
+
   const hashPassword = md5(password);
 
   const userLogged = await User.findOne({
@@ -59,8 +60,15 @@ const registerWithRole = async (userInfo) => {
   return { code: 409, message: 'User already registered' };
 };
 
+const getAll = async () => {
+  const response = await User.findAll();
+
+  return response;
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
+  getAll,
 };
