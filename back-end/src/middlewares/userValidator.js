@@ -4,7 +4,6 @@ const { loginSchema, registerSchema, registerWithRoleSchema } = require('../sche
 
 const loginValidator = async (req, res, next) => {
   const user = req.body;
-  console.log(req.body);
   const validate = loginSchema.validate(user);
 
   if (validate.error !== undefined) {
@@ -25,12 +24,10 @@ const registerValidator = async (req, res, next) => {
 };
 
 const registerWithRoleValidator = async (req, res, next) => {
-  console.log('\n CHECKING ADMIN REQ DATA', req.body);
-  // const { name, email, password, role } = req.body;
+  // console.log('\n CHECKING ADMIN REQ DATA', req.body);
   const validate = registerWithRoleSchema.validate(req.body);
 
   if (validate.error !== undefined) {
-    console.log('validate error:', validate.error);
     return res.status(400).json({ message: validate.error.details[0].message });
   }
   next();

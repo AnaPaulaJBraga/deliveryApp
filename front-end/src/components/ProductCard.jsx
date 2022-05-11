@@ -31,7 +31,6 @@ function ProductCard({ prodData, calcPrice }) {
     if (itemQty === 0 && loading) return null;
     if (itemQty === 0 && !loading) {
       removeItem(id);
-      console.log('SHOULD HAVE BEEN REMOVED ALREADY');
       return calcPrice();
     }
     setCart({ id, name, price: parseFloat(price), itemQty });

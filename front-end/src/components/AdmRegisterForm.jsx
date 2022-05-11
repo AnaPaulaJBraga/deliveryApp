@@ -37,20 +37,15 @@ export default function AdmRegisterForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log('TRYING TO CCREATE!');
       const { token } = await getUserData();
-      console.log('\n\n\n THIS IS THE TOKEN:', token);
       const response = await api
         .post(
           '/admin/manage',
           { name, email, password, role }, { headers: { Authorization: token } },
         );
-      console.log('\n\n\nthis is the response', response);
       setResStatus(response.code);
-      console.log('status when success: ', resStatus);
     } catch (err) {
       setResStatus(err.code);
-      console.log('whats the status?', resStatus);
       console.log('\nerror when doing an api.post', err);
     }
   };

@@ -31,7 +31,6 @@ const register = async (userInfo) => {
     const response = await User.create(hashPasswordUser);
 
     const accessToken = token({ email, password });
-    console.log(await response);
     return { accessToken, response };
   }
 
@@ -40,7 +39,7 @@ const register = async (userInfo) => {
 
 const registerWithRole = async (userInfo) => {
   const { name, email, password, role } = userInfo;
-  console.log('\n\n in register service. Heres the info:', name, email, password, role);
+  // console.log('\n\n in register service. Heres the info:', name, email, password, role);
   const user = await User.findOne({
     where: { email },
   });
