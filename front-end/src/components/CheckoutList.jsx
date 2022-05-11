@@ -58,12 +58,12 @@ function CheckoutList() {
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${it}` }
               >
-                {price}
+                {(price.toFixed(2).replace('.', ','))}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${it}` }
               >
-                {(price * itemQty)}
+                {(price * itemQty).toFixed(2).replace('.', ',')}
               </td>
               <td>
                 <button
