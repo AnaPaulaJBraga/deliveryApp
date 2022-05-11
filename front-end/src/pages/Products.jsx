@@ -68,8 +68,8 @@ function Products() {
   }
 
   useEffect(() => {
-    fetchProducts();
     calculatePrice();
+    if (myProds.length === 0) fetchProducts();
   }, []);
 
   // if (load) return <p> LOADING </p>;
