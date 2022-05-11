@@ -7,8 +7,40 @@ function CheckoutDelivery() {
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [sellerList, setSellerList] = useState([]);
   const [sellerId, setSellerId] = useState(0);
+  const [cart, setCart] = useState([]);
+  const [userId, setUserId] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [sale, setSale] = useState(
+    {
+      userId: 1,
+      sellerId: 1,
+      totalPrice: 1,
+      deliveryAddress: '',
+      deliveryNumber: '',
+      cart: [],
+    },
+  );
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem('cartData')));
+    setUserId(JSON.parse(localStorage.getItem('user')).id);
+    setTotalPrice(Number(JSON.parse(localStorage.getItem('orders'))));
+  }, []);
+
+  useEffect(() => {
+    setSale(
+      {
+        userId,
+        sellerId,
+        totalPrice,
+        deliveryAddress,
+        deliveryNumber,
+        cart,
+      },
+    );
+  }, [userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, cart]);
 
   useEffect(() => {
     api.get('http://localhost:3001/getAll')// confirmar rota!!!!
@@ -20,6 +52,8 @@ function CheckoutDelivery() {
   }, []);
 
   const sendOrder = () => {
+    // post de sale no banco de dados ??
+    // tem que pegar o id da sale que vai ser criado no bd
     navigate(`/customer/orders/${id}`);
   };
 
