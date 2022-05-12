@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getTotalPrice } from '../utilities/Cart';
 
 function CheckoutList() {
   const [products, setProducts] = useState([]);
@@ -6,11 +7,10 @@ function CheckoutList() {
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cartData'));// pega os produtos do carrinho atualizado
-    const orders = JSON.parse(localStorage.getItem('orders'));// pega o valor
-    // console.log(orders);
-    setTotalPrice(orders);
+    // const total = JSON.parse(localStorage.getItem('totalPrice'));// pega o novo valor
+    setTotalPrice(getTotalPrice().replace('.', ','));
     setProducts(cartData);
-  }, []);
+  }, [totalPrice]);
 
   const handleRemove = ({ target }) => {
     const filter = products.filter((prod) => prod.id !== Number(target.id));
@@ -20,7 +20,7 @@ function CheckoutList() {
     setProducts(filter);
     setTotalPrice(finalPrice);
     localStorage.setItem('cartData', JSON.stringify(filter));// atualiza produtos
-    localStorage.setItem('orders', JSON.stringify(finalPrice));// atualiza valor
+    localStorage.setItem('totalPrice', JSON.stringify(finalPrice));// atualiza valor
   };
   // tem que somar novamente e atualizar valor se for removido algum item
 

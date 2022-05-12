@@ -25,9 +25,9 @@ function CheckoutDelivery() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem('cartData')));
+    setCart(JSON.parse(localStorage.getItem('cartData')));// vem id, produto e price
     setUserId(JSON.parse(localStorage.getItem('user')).id);
-    setTotalPrice((JSON.parse(localStorage.getItem('orders')))); // está vindo null
+    setTotalPrice((JSON.parse(localStorage.getItem('totalPrice')))); // está vindo null pq so atualiza se remover algum item
     setToken(JSON.parse(localStorage.getItem('user')).token);
   }, []);
 
@@ -58,8 +58,9 @@ function CheckoutDelivery() {
   const sendOrder = () => {
     // console.log(sale);
     api.post('sale', sale, { headers: { Authorization: token } })
-      .then(({ data: { id } }) => {
-        navigate(`/customer/orders/${id}`);
+      .then((response) => {
+        console.log(response);
+        navigate(`/customer/orders/${response.data}`);
       });
   };
 
