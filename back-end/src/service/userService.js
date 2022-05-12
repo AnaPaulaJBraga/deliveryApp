@@ -65,9 +65,16 @@ const getAll = async () => {
   return response;
 };
 
+const usersRole = async (role) => {
+  const response = await User.findAll({ where: { role } });
+
+  return response;
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
   getAll,
+  usersRole,
 };

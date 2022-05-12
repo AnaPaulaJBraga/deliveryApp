@@ -4,13 +4,15 @@ import Navbar from '../components/NavBar';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import '../styles/pages/products.css';
-import { getCart } from '../components/Cart';
+// import { getCart, saveTotalPrice } from '../components/Cart';
 import moneyToString from '../utilities/moneyStringConvert';
 import getUserData from '../components/LocalUserData';
+import calculatePrice from '../utilities/calculatePrice';
+import Loading from '../components/Loading';
 
 function Products() {
   const letsNavigate = useNavigate();
-  // const [load, setLoad] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const defaultPrice = 0;
   const [myProds, setProds] = useState([]);
   const [finalPrice, setPrice] = useState(defaultPrice.toFixed(2));
@@ -18,15 +20,12 @@ function Products() {
   function handleNavigate() {
     letsNavigate('/customer/checkout');
   }
-  function calculatePrice() {
-    // console.log('calculating price');
-    const DEFAULT_PRICE = 0;
-    const myCart = getCart();
-    if (myCart.length < 1) return setPrice(DEFAULT_PRICE.toFixed(2));
-    const calcPrice = myCart
-      .map(({ price, itemQty }) => parseInt(itemQty, 10) * parseFloat(price))
-      .reduce((prevVal, currVal) => prevVal + currVal);
-    return setPrice(calcPrice.toFixed(2));
+
+  function callTotalPrice() {
+    console.log('total price from localStorage:', calculatePrice());
+    setPrice(calculatePrice());
+    console.log('\n \n this is useEffect price:', finalPrice);
+    setLoading(false);
   }
 
   async function fetchProducts() {
@@ -38,7 +37,7 @@ function Products() {
         <ProductCard
           key={ prod.id }
           prodData={ prod }
-          calcPrice={ () => calculatePrice() }
+          calcPrice={ () => callTotalPrice() }
         />
       ));
     setProds(allProducts);
@@ -63,13 +62,12 @@ function Products() {
       </footer>
     );
     //  Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00
-
-    // Ele consta como footer mas eu coloquei no topo da pagina pra ficar mais facil de acessar ele durante o desenvolvimento
   }
 
   useEffect(() => {
-    calculatePrice();
     if (myProds.length === 0) fetchProducts();
+    callTotalPrice();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // if (load) return <p> LOADING </p>;
@@ -77,10 +75,12 @@ function Products() {
     <main>
       PRODUCTS
       <Navbar pageName="Produtos" />
-      <span className="productList">
-        { myProds }
-        { checkoutField() }
-      </span>
+      { isLoading ? <Loading /> : (
+        <span className="productList">
+          { myProds }
+          { checkoutField() }
+        </span>
+      )}
     </main>
   );
 }

@@ -25,4 +25,9 @@ export const removeItem = (id) => {
   localStorage.setItem('cartData', JSON.stringify(itemRemoved));
 };
 
+export const saveTotalPrice = (totalPrice) => {
+  localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+};
+
+export const getTotalPrice = () => JSON.parse(localStorage.getItem('totalPrice'));
 // cartData from storage is an array of products. Check ProductCard to see its structure.

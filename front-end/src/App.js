@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Register from './pages/Register';
 import SalesOrder from './pages/sales/SalesOrder';
 import SalesDetails from './pages/sales/SalesDetails';
+import Checkout from './pages/Checkout';
 import CustomerOrder from './pages/customer/CustomerOrder';
 import CustomerOrderDetails from './pages/customer/CustomerOrderDetails';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/products/" element={ <Navigate to="/customer/products" /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
+        <Route exact path="/customer/checkout" element={ <Checkout /> } />
         <Route exact path="/admin/manage" element={ <AdminManager /> } />
         <Route path="/customer/orders" element={ <CustomerOrder /> } />
         <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />

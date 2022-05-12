@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
-import { setCart, removeItem, getCart } from './Cart';
+import { setCart, removeItem, getCart } from '../utilities/Cart';
 import moneyToString from '../utilities/moneyStringConvert';
 
 function ProductCard({ prodData, calcPrice }) {
@@ -45,7 +45,7 @@ function ProductCard({ prodData, calcPrice }) {
     setCart({ id, name, price: parseFloat(price), itemQty });
     console.log('calculating the addition');
     return calcPrice();
-  }, [itemQty]);
+  }, [calcPrice, id, itemQty, loading, name, price]);
   // it won't shut up about dependencies but you can just ignore it
 
   useEffect(() => {
