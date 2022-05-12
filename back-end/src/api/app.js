@@ -3,7 +3,7 @@ const cors = require('cors');
 const userRouter = require('../routes/userRouter');
 const productRouter = require('../routes/productRouter');
 const saleRouter = require('../routes/saleRouter');
-const verifyAuthorization = require('../middlewares/authorization');
+// const verifyAuthorization = require('../middlewares/authorization');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(userRouter);
 
-app.use(verifyAuthorization);
+// app.use(verifyAuthorization);
 // FOR TESTING
 
 app.use(productRouter);
