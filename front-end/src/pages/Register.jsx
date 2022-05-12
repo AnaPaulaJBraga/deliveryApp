@@ -25,7 +25,7 @@ function Register() {
     }
   }, [name, email, password]);
 
-  async function onSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       const registerUser = await api.post('register', { name, email, password });
@@ -43,14 +43,15 @@ function Register() {
       // localStorage.userData = JSON.stringify(userData);
       navigate('/customer/products');
     } catch (error) {
+      console.log(error);
       setUser(error);
     }
   }
 
   return (
-    <>
+    <main>
       <h1>Delivery App</h1>
-      <form onSubmit={ onSubmit }>
+      <form onSubmit={ handleSubmit }>
         <label htmlFor="name">
           Nome
           <input
@@ -99,7 +100,7 @@ function Register() {
           )
         }
       </form>
-    </>
+    </main>
   );
 }
 

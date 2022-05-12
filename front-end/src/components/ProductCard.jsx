@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
-import { setCart, removeItem } from './Cart';
+import { setCart, removeItem, getCart } from '../utilities/Cart';
 import moneyToString from '../utilities/moneyStringConvert';
 
 function ProductCard({ prodData, calcPrice }) {
@@ -27,21 +27,32 @@ function ProductCard({ prodData, calcPrice }) {
     return setItemQty(itemQty - 1);
   };
 
+  const checkQty = () => {
+    const myCart = getCart();
+    myCart.forEach((prod) => {
+      if (prod.id === id) {
+        setItemQty(prod.itemQty);
+      }
+    });
+  };
+
   useEffect(() => {
     if (itemQty === 0 && loading) return null;
     if (itemQty === 0 && !loading) {
       removeItem(id);
-      console.log('SHOULD HAVE BEEN REMOVED ALREADY');
       return calcPrice();
     }
     setCart({ id, name, price: parseFloat(price), itemQty });
+    console.log('calculating the addition');
     return calcPrice();
-  }, [itemQty]);
+  }, [calcPrice, id, itemQty, loading, name, price]);
   // it won't shut up about dependencies but you can just ignore it
 
   useEffect(() => {
     setLoading(false);
+    checkQty();
   }, []);
+  // ignore alert
 
   return (
     <div
@@ -72,7 +83,7 @@ function ProductCard({ prodData, calcPrice }) {
 
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="text"
+        type="tel"
         value={ itemQty }
         onChange={ handleInputQtyChange }
       />

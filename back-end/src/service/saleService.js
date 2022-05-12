@@ -9,14 +9,14 @@ const getById = async (id) => {
 };
 
 const create = async (saleData) => {
-  const { sale, saleProduct } = saleData;
-  const { id } = await Sale.create(sale);
+  console.log(saleData);
+  const { id } = await Sale.create(saleData);
 
-  await Promise.all(
-    saleProduct.map(async (saleInfo) => {
-      await SalesProduct.create({ saleId: id, ...saleInfo });
-    }),
-  );
+await Promise.all(
+saleData.cart.map(async ({ id: productId, itemQty }) => {
+await SalesProduct.create({ saleId: id, productId, quantity: itemQty });
+}),
+); 
 
   return id;
 };
