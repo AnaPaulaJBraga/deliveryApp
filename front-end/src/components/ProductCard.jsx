@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/components/productCard.css';
 import PropTypes from 'prop-types';
-import { setCart, removeItem } from './Cart';
+import { setCart, removeItem, getCart } from './Cart';
 import moneyToString from '../utilities/moneyStringConvert';
 
 function ProductCard({ prodData, calcPrice }) {
@@ -27,6 +27,15 @@ function ProductCard({ prodData, calcPrice }) {
     return setItemQty(itemQty - 1);
   };
 
+  const checkQty = () => {
+    const myCart = getCart();
+    myCart.forEach((prod) => {
+      if (prod.id === id) {
+        setItemQty(prod.itemQty);
+      }
+    });
+  };
+
   useEffect(() => {
     if (itemQty === 0 && loading) return null;
     if (itemQty === 0 && !loading) {
@@ -41,7 +50,9 @@ function ProductCard({ prodData, calcPrice }) {
 
   useEffect(() => {
     setLoading(false);
+    checkQty();
   }, []);
+  // ignore alert
 
   return (
     <div
