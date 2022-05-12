@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -9,11 +9,15 @@ import moneyToString from '../utilities/moneyStringConvert';
 import getUserData from '../components/LocalUserData';
 
 function Products() {
+  const letsNavigate = useNavigate();
   // const [load, setLoad] = useState(true);
   const defaultPrice = 0;
   const [myProds, setProds] = useState([]);
   const [finalPrice, setPrice] = useState(defaultPrice.toFixed(2));
 
+  function handleNavigate() {
+    letsNavigate('/customer/checkout');
+  }
   function calculatePrice() {
     // console.log('calculating price');
     const DEFAULT_PRICE = 0;
@@ -45,18 +49,17 @@ function Products() {
   function checkoutField() {
     return (
       <footer className="checkoutFooter">
-        <Link to="/customer/checkout">
-          <button
-            data-testid="customer_products__button-cart"
-            type="button"
-            disabled={ parseInt(finalPrice, 10) === 0 }
-          >
-            Checkout~
-            <h2 data-testid="customer_products__checkout-bottom-value">
-              { moneyToString(finalPrice) }
-            </h2>
-          </button>
-        </Link>
+        <button
+          data-testid="customer_products__button-cart"
+          type="button"
+          disabled={ parseInt(finalPrice, 10) === 0 }
+          onClick={ handleNavigate }
+        >
+          Checkout
+          <h2 data-testid="customer_products__checkout-bottom-value">
+            { moneyToString(finalPrice) }
+          </h2>
+        </button>
       </footer>
     );
     //  Aqui o link acima deve estar desabilitado caso o carrinho esteja vazio - ou seja, com o preço final 0,00
@@ -65,8 +68,8 @@ function Products() {
   }
 
   useEffect(() => {
-    fetchProducts();
     calculatePrice();
+    if (myProds.length === 0) fetchProducts();
   }, []);
 
   // if (load) return <p> LOADING </p>;
@@ -74,9 +77,9 @@ function Products() {
     <main>
       PRODUCTS
       <Navbar pageName="Produtos" />
-      { checkoutField() }
-      <span className='="productList'>
+      <span className="productList">
         { myProds }
+        { checkoutField() }
       </span>
     </main>
   );
