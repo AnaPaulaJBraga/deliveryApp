@@ -14,7 +14,9 @@ const create = async (saleData) => {
   
       await Promise.all(
           saleData.cart.map(async ({ id: productId, itemQty }) => {
-            await SalesProduct.create({ saleId: id, productId, quantity: itemQty }, { transaction: t });
+            await SalesProduct.create(
+              { saleId: id, productId, quantity: itemQty }, { transaction: t },
+            );
           }),
         );
       
