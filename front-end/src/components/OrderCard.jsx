@@ -10,7 +10,11 @@ function SalesCard(props) {
   const PATH = (role === 'seller') ? '/seller/orders' : '/customer/orders';
 
   return (
-    <a className="card card-body bg-primary mb-3" href={ `${PATH}/${id}` }>
+    <a
+      className="card card-body bg-primary mb-3"
+      href={ `${PATH}/${id}` }
+      data-testid={ `${role}_products__element-card-title-${id}` }
+    >
       <p
         className="card text-primary text-center"
         data-testid={ `${role}_orders__element-delivery-status-${id}` }
