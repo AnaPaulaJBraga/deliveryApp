@@ -34,6 +34,7 @@ function ProductCard({ prodData, calcPrice }) {
       return calcPrice();
     }
     setCart({ id, name, price: parseFloat(price), itemQty });
+    console.log('calculating the addition');
     return calcPrice();
   }, [itemQty]);
   // it won't shut up about dependencies but you can just ignore it
@@ -71,7 +72,7 @@ function ProductCard({ prodData, calcPrice }) {
 
       <input
         data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="text"
+        type="tel"
         value={ itemQty }
         onChange={ handleInputQtyChange }
       />
