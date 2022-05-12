@@ -35,9 +35,22 @@ const getAll = async (req, res) => {
   res.status(200).json(response);
 };
 
+const usersRole = async (req, res) => {
+  try {
+    const { role } = req.params;
+
+    const userList = await user.usersRole(role);
+
+    return res.status(201).json(userList);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
   getAll,
+  usersRole,
 };
