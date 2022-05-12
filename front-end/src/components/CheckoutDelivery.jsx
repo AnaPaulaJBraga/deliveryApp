@@ -27,7 +27,7 @@ function CheckoutDelivery() {
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cartData')));// vem id, produto e price
     setUserId(JSON.parse(localStorage.getItem('user')).id);
-    setTotalPrice((JSON.parse(localStorage.getItem('totalPrice')))); // está vindo null pq so atualiza se remover algum item
+    setTotalPrice((JSON.parse(localStorage.getItem('totalPrice'))));
     setToken(JSON.parse(localStorage.getItem('user')).token);
   }, []);
 

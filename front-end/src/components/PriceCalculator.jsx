@@ -1,4 +1,4 @@
-import { getCart } from './Cart';
+import { getCart } from '../utilities/Cart';
 
 export default function calculatePrice() {
   const myCart = getCart();
