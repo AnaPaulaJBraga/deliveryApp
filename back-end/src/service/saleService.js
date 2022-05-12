@@ -1,4 +1,4 @@
-const { Sale, SalesProduct, Product } = require('../database/models');
+const { Sale, SalesProduct, Product, sequelize } = require('../database/models');
 
 const getById = async (id) => {
   const response = await Sale.findAll({
@@ -9,16 +9,19 @@ const getById = async (id) => {
 };
 
 const create = async (saleData) => {
-  const { sale, saleProduct } = saleData;
-  const { id } = await Sale.create(sale);
+    const response = await sequelize.transaction(async (t) => {
+      const { id } = await Sale.create(saleData, { transaction: t });
+  
+      await Promise.all(
+          saleData.cart.map(async ({ id: productId, itemQty }) => {
+            await SalesProduct.create({ saleId: id, productId, quantity: itemQty }, { transaction: t });
+          }),
+        );
+      
+      return id;
+    });
 
-  await Promise.all(
-    saleProduct.map(async (saleInfo) => {
-      await SalesProduct.create({ saleId: id, ...saleInfo });
-    }),
-  );
-
-  return id;
+    return response;
 };
 
 const getSaleDetail = async (id) => {
