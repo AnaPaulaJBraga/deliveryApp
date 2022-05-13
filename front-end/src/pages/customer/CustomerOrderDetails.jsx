@@ -19,8 +19,6 @@ function CustomerOrderDetails() {
         Authorization: token,
       },
     });
-    // const dataTest = data.find((order) => order.id === orderId);
-    console.log('response:', data.find((order) => order.id === orderId));
     setRole(roleStorage);
     setDataOrder(data.find((order) => order.id === orderId));
     setIsLoading(false);

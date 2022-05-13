@@ -12,14 +12,13 @@ function CustomerOrder() {
   const [role, setRole] = useState('');
 
   async function getCustomer() {
-    const response = await api.get(`/customer/${id}`, {
+    const { data } = await api.get(`/customer/${id}`, {
       headers: {
         Authorization: token,
       },
     });
-    const data = dataMocked;
     setRole(roleStorage);
-    setCustomer((response.data.length > 0) ? response.data : data);
+    setCustomer(data);
     setIsLoading(false);
   }
 

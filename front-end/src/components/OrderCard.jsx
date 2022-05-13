@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Address from './orders/Address';
 
-function SalesCard(props) {
+function OrderCard(props) {
   const {
     id, role, status,
     deliveryNumber, totalPrice, salesDate } = props;
@@ -47,7 +47,7 @@ function SalesCard(props) {
   );
 }
 
-SalesCard.propTypes = {
+OrderCard.propTypes = {
   id: PropTypes.number.isRequired,
   role: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
@@ -56,4 +56,4 @@ SalesCard.propTypes = {
   salesDate: PropTypes.string.isRequired,
 };
 
-export default SalesCard;
+export default OrderCard;
