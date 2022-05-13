@@ -10,7 +10,7 @@ function DetailsHeader({ data, role }) {
     deliveryNumber,
     saleDate,
   } = data;
-  // console.log(data);
+  const date = new Date(Date.parse(saleDate)).toLocaleDateString();
 
   return (
     <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -38,7 +38,7 @@ function DetailsHeader({ data, role }) {
           `${role}_order_details__element-order-details-label-order-date`
         }
       >
-        { saleDate }
+        { date }
       </p>
       <p className="card text-primary text-center">{ status }</p>
       <div>
