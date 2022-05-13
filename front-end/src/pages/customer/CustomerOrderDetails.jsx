@@ -29,7 +29,8 @@ function CustomerOrderDetails() {
   return (
     <div>
       <NavBar pageName="Pedidos" />
-      {isLoading ? (<Loading />) : <DetailsCard role={ role } data={ dataOrder } /> }
+      { isLoading ? (<Loading />) : (
+        <DetailsCard role={ role } data={ dataOrder } token={ token } />) }
     </div>
   );
 }
