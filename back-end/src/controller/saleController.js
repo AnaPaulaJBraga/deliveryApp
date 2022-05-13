@@ -24,8 +24,16 @@ const getSaleDetail = async (req, res) => {
   res.status(200).json(response);
 };
 
+const statusUpdate = async (req, res) => {
+  const { id, status } = req.body;
+  await sale.statusUpdate(id, status);
+  
+  res.sendStatus(204);
+};
+
 module.exports = {
   getById,
   create,
   getSaleDetail,
+  statusUpdate,
 };
