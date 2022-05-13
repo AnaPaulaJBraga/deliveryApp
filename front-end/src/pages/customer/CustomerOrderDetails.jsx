@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import DetailsCard from '../../components/DetailsCard';
-import dataMocked from '../../data/dataMocked';
 import api from '../../services/api';
 
 function CustomerOrderDetails() {
-  // api get saledetails/:id(do produto)
   const { token, role: roleStorage, id } = JSON.parse(localStorage.getItem('user'));
   const [isLoading, setIsLoading] = useState(true);
   const [orderId] = useState(Number(window.location.pathname.split('/')[3]));

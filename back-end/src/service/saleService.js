@@ -40,8 +40,13 @@ const getSaleDetail = async (id) => {
   return response;
 };
 
+const statusUpdate = async (id, status) => {
+  await Sale.update({ status }, { where: { id } });
+};
+
 module.exports = {
   getById,
   create,
   getSaleDetail,
+  statusUpdate,
 };
