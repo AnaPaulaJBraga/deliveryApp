@@ -30,7 +30,7 @@ function DetailsBody({ data, role }) {
           `${role}_order_details__element-order-table-quantity-${item.id}`
         }
       >
-        {item.saleProducts.quantity}
+        { item.salesProduct.quantity }
       </p>
       <p
         className="card text-primary text-center"
@@ -46,7 +46,7 @@ function DetailsBody({ data, role }) {
           `${role}_order_details__element-order-table-sub-total-${item.id}`
         }
       >
-        {`R$ ${(item.saleProducts.quantity * item.price).toFixed(2)}`}
+        {`R$ ${(item.salesProduct.quantity * item.price).toFixed(2)}`}
       </p>
     </div>
   ));
@@ -57,8 +57,8 @@ DetailsBody.propTypes = {
     orders: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      saleProducts: PropTypes.shape({
+      price: PropTypes.string.isRequired,
+      salesProduct: PropTypes.shape({
         quantity: PropTypes.number.isRequired,
       }).isRequired,
     })).isRequired,

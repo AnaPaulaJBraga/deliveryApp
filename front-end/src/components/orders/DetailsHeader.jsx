@@ -8,7 +8,7 @@ function DetailsHeader({ data, role }) {
     id,
     status,
     deliveryNumber,
-    salesDate,
+    saleDate,
   } = data;
   // console.log(data);
 
@@ -38,7 +38,7 @@ function DetailsHeader({ data, role }) {
           `${role}_order_details__element-order-details-label-order-date`
         }
       >
-        { salesDate }
+        { saleDate }
       </p>
       <p className="card text-primary text-center">{ status }</p>
       <div>
@@ -62,7 +62,7 @@ DetailsHeader.propTypes = {
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
     deliveryNumber: PropTypes.string.isRequired,
-    salesDate: PropTypes.string.isRequired,
+    saleDate: PropTypes.string.isRequired,
   }).isRequired,
   role: PropTypes.string.isRequired,
 };
