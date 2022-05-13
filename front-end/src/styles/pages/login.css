@@ -1,25 +1,25 @@
 #main-login {
-  display: flex;
   align-items: center;
-  flex-direction: column;
   background-color: rgb(14, 15, 15);
   color: antiquewhite;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
   width: 100vw;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: space-around;
-  border-radius: 5px;
-  font-size: 10px;
   background-color: rgb(26, 25, 25);
+  border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
   height: 150px;
+  justify-content: space-around;
+  text-align: center;
   width: 220px;
 }
 
@@ -27,40 +27,30 @@ h1 {
   font-size: 25px;
 }
 
-/* label {
-  text-align: left;
-  margin-left: 20px;
-} */
-
-/* label, input {
-	width:68px;
-	margin: 3px 0;
-} */
-
 #email {
   display: block;
-  width: 150px;
-  margin: 3px 36px;
   font-size: 9px;
+  margin: 3px 36px;
   text-align: left;
+  width: 150px;
 } 
 
 #password {
   display: block;
-  width: 150px;
-  margin: 3px 36px;
   font-size: 9px;
+  margin: 3px 36px;
   text-align: left;
+  width: 150px;
 } 
 
 #button-login {
+  border-radius: 3px;
   height: 20px;
   margin: 0px 35px;
-  border-radius: 3px;
 }
 
 #button-register {
+  border-radius: 3px;
   height: 20px;
   padding: 0px 22px;
-  border-radius: 3px;
 }
