@@ -18,6 +18,7 @@ function SalesOrder() {
       },
     });
     const data = dataMocked;
+    console.log(response.data);
     setRole(roleStorage);
     setSales((response.data.length > 0) ? response.data : data);
     setIsLoading(false);
@@ -41,7 +42,7 @@ function SalesOrder() {
             deliveryNumber={ sale.deliveryNumber }
             deliveryAddress={ sale.deliveryAddress }
             totalPrice={ sale.totalPrice }
-            salesDate={ sale.salesDate }
+            saleDate={ sale.saleDate }
           />
         ))
       )}

@@ -5,7 +5,8 @@ import Address from './orders/Address';
 function OrderCard(props) {
   const {
     id, role, status,
-    deliveryNumber, totalPrice, salesDate } = props;
+    deliveryNumber, totalPrice, saleDate } = props;
+  const date = new Date(Date.parse(saleDate)).toLocaleDateString();
 
   const PATH = (role === 'seller') ? '/seller/orders' : '/customer/orders';
 
@@ -35,13 +36,13 @@ function OrderCard(props) {
         className="card text-primary text-center"
         data-testid={ `${role}_orders__element-card-price-${id}` }
       >
-        {totalPrice}
+        {`R$ ${totalPrice}`}
       </p>
       <p
         className="card text-primary text-center"
         data-testid={ `${role}_orders__element-order-date-${id}` }
       >
-        {salesDate}
+        {date}
       </p>
     </a>
   );
@@ -53,7 +54,7 @@ OrderCard.propTypes = {
   status: PropTypes.string.isRequired,
   deliveryNumber: PropTypes.string.isRequired,
   totalPrice: PropTypes.string.isRequired,
-  salesDate: PropTypes.string.isRequired,
+  saleDate: PropTypes.string.isRequired,
 };
 
 export default OrderCard;

@@ -36,7 +36,7 @@ function CustomerOrder() {
             status={ order.status }
             deliveryNumber={ order.deliveryNumber }
             totalPrice={ order.totalPrice }
-            salesDate={ order.salesDate }
+            saleDate={ order.saleDate }
           />
         ))
       )}

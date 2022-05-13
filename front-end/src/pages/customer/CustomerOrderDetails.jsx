@@ -5,20 +5,20 @@ import DetailsCard from '../../components/DetailsCard';
 import api from '../../services/api';
 
 function CustomerOrderDetails() {
-  const { token, role: roleStorage, id } = JSON.parse(localStorage.getItem('user'));
+  const { token, role: roleStorage } = JSON.parse(localStorage.getItem('user'));
   const [isLoading, setIsLoading] = useState(true);
   const [orderId] = useState(Number(window.location.pathname.split('/')[3]));
   const [dataOrder, setDataOrder] = useState([]);
   const [role, setRole] = useState('');
 
   async function getDataOrder() {
-    const { data } = await api.get(`/customer/${id}`, {
+    const { data } = await api.get(`/saledetails/${orderId}`, {
       headers: {
         Authorization: token,
       },
     });
     setRole(roleStorage);
-    setDataOrder(data.find((order) => order.id === orderId));
+    setDataOrder(data);
     setIsLoading(false);
   }
 
