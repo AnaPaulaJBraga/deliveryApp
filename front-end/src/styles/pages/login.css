@@ -1,11 +1,11 @@
-#main-login {
+.main-login {
   align-items: center;
   background-color: rgb(14, 15, 15);
   color: antiquewhite;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100vh;
+  justify-content: center;
   width: 100vw;
 }
 
@@ -27,30 +27,30 @@ h1 {
   font-size: 25px;
 }
 
-#email {
+.email {
   display: block;
   font-size: 9px;
   margin: 3px 36px;
   text-align: left;
   width: 150px;
-} 
-
-#password {
-  display: block;
-  font-size: 9px;
-  margin: 3px 36px;
-  text-align: left;
-  width: 150px;
-} 
-
-#button-login {
-  border-radius: 3px;
-  height: 20px;
-  margin: 0px 35px;
 }
 
-#button-register {
+.password {
+  display: block;
+  font-size: 9px;
+  margin: 3px 36px;
+  text-align: left;
+  width: 150px;
+}
+
+.button-login {
   border-radius: 3px;
   height: 20px;
-  padding: 0px 22px;
+  margin: 0 35px;
+}
+
+.button-register {
+  border-radius: 3px;
+  height: 20px;
+  padding: 0 22px;
 }

@@ -49,12 +49,13 @@ function Login() {
   }
 
   return (
-    <main id="main-login">
+    <main className="main-login">
       <h1>Delivery App</h1>
       <form onSubmit={ onSubmit }>
         <label htmlFor="email">
           Email
           <input
+            className="email"
             data-testid="common_login__input-email"
             type="text"
             id="email"
@@ -66,6 +67,7 @@ function Login() {
         <label htmlFor="password">
           Password
           <input
+            className="password"
             data-testid="common_login__input-password"
             type="password"
             id="password"
@@ -75,18 +77,18 @@ function Login() {
           />
         </label>
         <button
+          className="button-login"
           data-testid="common_login__button-login"
           type="submit"
-          id="button-login"
           disabled={ disabled }
         >
           Login
         </button>
         <Link to="/register">
           <button
+            className="button-register"
             data-testid="common_login__button-register"
             type="button"
-            id="button-register"
           >
             Ainda não tenho conta
           </button>

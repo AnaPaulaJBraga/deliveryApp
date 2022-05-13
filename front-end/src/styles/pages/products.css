@@ -12,8 +12,8 @@ body {
   display: flex;
   flex-basis: 0;
   flex-grow: 1;
-  font-size: 10px;
   flex-wrap: wrap;
+  font-size: 10px;
   justify-content: space-around;
   justify-items: center;
   position: absolute;
@@ -22,6 +22,6 @@ body {
 
 .checkoutFooter button {
   border-radius: 5px;
-  margin: 80px 50px 0px 30px;
+  margin: 80px 50px 0 30px;
   text-align: center;
 }
