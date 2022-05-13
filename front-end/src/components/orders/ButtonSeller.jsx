@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import api from '../../services/api';
 
-function ButtonSeller({ status }) {
-  function changeStatus(e) {
-    // deve ser usado api para alterar status do pedido no BD
-    console.log(e.target.value);
-    // console.log(`Status alterado para ${e.target.value}`);
+function ButtonSeller({ status, token }) {
+  const [newStatus, setNewStatus] = useState(status);
+  async function changeStatus(e) {
+    const id = Number(window.location.pathname.split('/')[3]);
+    const { value } = e.target;
+    await api.put('/statusupdate',
+      {
+        id,
+        status: value,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      });
+    setNewStatus(value);
   }
+
+  useEffect(() => {
+
+  }, [newStatus]);
 
   return (
     <div className="container d-flex">
@@ -15,7 +31,7 @@ function ButtonSeller({ status }) {
         className="btn btn-warning btn-sm"
         data-testid="seller_order_details__button-preparing-check"
         onClick={ changeStatus }
-        disabled={ status !== 'Pendente' }
+        disabled={ newStatus !== 'Pendente' }
         value="Preparando"
       >
         PREPARAR PEDIDO
@@ -25,7 +41,7 @@ function ButtonSeller({ status }) {
         className="btn btn-success btn-sm"
         data-testid="seller_order_details__button-dispatch-check"
         onClick={ changeStatus }
-        disabled={ status !== 'Preparando' }
+        disabled={ newStatus !== 'Preparando' }
         value="Em trânsito"
       >
         SAIU PARA ENTREGA
@@ -36,6 +52,7 @@ function ButtonSeller({ status }) {
 
 ButtonSeller.propTypes = {
   status: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default ButtonSeller;
