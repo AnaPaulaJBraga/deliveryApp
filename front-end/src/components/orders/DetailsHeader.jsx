@@ -62,10 +62,12 @@ function DetailsHeader({ data, role, token }) {
           (role === 'customer') ? (
             <ButtonCustomer
               status={ status }
+              token={ token }
             />)
             : (
               <ButtonSeller
                 status={ status }
+                token={ token }
               />)
         }
       </div>
