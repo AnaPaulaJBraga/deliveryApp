@@ -72,14 +72,14 @@ function Products() {
 
   // if (load) return <p> LOADING </p>;
   return (
-    <main>
+    <main id="main-product">
       PRODUCTS
       <Navbar pageName="Produtos" />
       { isLoading ? <Loading /> : (
-        <span className="productList">
+        <div className="productList">
           { myProds }
           { checkoutField() }
-        </span>
+        </div>
       )}
     </main>
   );

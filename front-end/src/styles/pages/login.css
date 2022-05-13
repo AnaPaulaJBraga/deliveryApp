@@ -1,17 +1,66 @@
-body {
+#main-login {
+  display: flex;
   align-items: center;
+  flex-direction: column;
   background-color: rgb(14, 15, 15);
   color: antiquewhite;
-  display: flex;
   justify-content: center;
-  padding: 25vh;
+  height: 100vh;
+  width: 100vw;
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  font-size: 10px;
   background-color: rgb(26, 25, 25);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 50px;
+  height: 150px;
+  width: 220px;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+/* label {
+  text-align: left;
+  margin-left: 20px;
+} */
+
+/* label, input {
+	width:68px;
+	margin: 3px 0;
+} */
+
+#email {
+  display: block;
+  width: 150px;
+  margin: 3px 36px;
+  font-size: 9px;
+  text-align: left;
+} 
+
+#password {
+  display: block;
+  width: 150px;
+  margin: 3px 36px;
+  font-size: 9px;
+  text-align: left;
+} 
+
+#button-login {
+  height: 20px;
+  margin: 0px 35px;
+  border-radius: 3px;
+}
+
+#button-register {
+  height: 20px;
+  padding: 0px 22px;
+  border-radius: 3px;
 }
