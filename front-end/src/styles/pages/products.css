@@ -3,9 +3,25 @@ body {
   color: aliceblue;
 }
 
+.main-product {
+  display: flex;
+  justify-content: center;
+}
+
 .productList {
   display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
   flex-wrap: wrap;
+  font-size: 10px;
+  justify-content: space-around;
+  justify-items: center;
   position: absolute;
-  width: 80%;
+  width: 100vw;
+}
+
+.checkoutFooter button {
+  border-radius: 5px;
+  margin: 80px 50px 0 30px;
+  text-align: center;
 }
