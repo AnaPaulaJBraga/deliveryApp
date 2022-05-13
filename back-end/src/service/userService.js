@@ -71,10 +71,20 @@ const usersRole = async (role) => {
   return response;
 };
 
+const getSellerById = async (id) => {
+  const response = await User.findOne({
+    where: { id },
+    attributes: { exclude: ['password'] },
+  });
+
+  return response;
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
   getAll,
   usersRole,
+  getSellerById,
 };

@@ -47,10 +47,18 @@ const usersRole = async (req, res) => {
   }
 };
 
+const getSellerById = async (req, res) => {
+  const { id } = req.params;
+  const response = await user.getSellerById(id);
+
+  res.status(200).json(response);
+};
+
 module.exports = {
   login,
   register,
   registerWithRole,
   getAll,
   usersRole,
+  getSellerById,
 };
