@@ -6,7 +6,6 @@ import api from '../../services/api';
 
 function DetailsHeader({ data, role, token }) {
   const {
-    id,
     sellerId,
     status,
     deliveryNumber,
@@ -33,7 +32,7 @@ function DetailsHeader({ data, role, token }) {
       <p
         className="card text-primary text-center"
         data-testid={
-          `${role}_order_details__element-order-details-label-order-${id}`
+          `${role}_order_details__element-order-details-label-order-id`
         }
       >
         Pedido
@@ -56,7 +55,14 @@ function DetailsHeader({ data, role, token }) {
       >
         { date }
       </p>
-      <p className="card text-primary text-center">{ status }</p>
+      <p
+        className="card text-primary text-center"
+        data-testid={
+          `${role}_order_details__element-order-details-label-delivery-status`
+        }
+      >
+        { status }
+      </p>
       <div>
         {
           (role === 'customer') ? (
