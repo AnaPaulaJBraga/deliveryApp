@@ -29,7 +29,7 @@ function ButtonCustomer({ status, token }) {
         className="btn btn-success btn-sm"
         data-testid="customer_order_details__button-delivery-check" // tem que trocar
         onClick={ changeStatus }
-        disabled={ newStatus !== 'Em trânsito' }
+        disabled={ newStatus !== 'Em Trânsito' }
         value="Entregue"
       >
         Confirmar recebimento
