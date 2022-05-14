@@ -25,27 +25,35 @@ function ButtonSeller({ status, token }) {
   }, [newStatus]);
 
   return (
-    <div className="container d-flex">
-      <button
-        type="button"
-        className="btn btn-warning btn-sm"
-        data-testid="seller_order_details__button-preparing-check"
-        onClick={ changeStatus }
-        disabled={ newStatus !== 'Pendente' }
-        value="Preparando"
+    <div className="form-inline">
+      <p
+        className="container card text-primary text-center"
+        data-testid="seller_order_details__element-order-details-label-delivery-status"
       >
-        PREPARAR PEDIDO
-      </button>
-      <button
-        type="button"
-        className="btn btn-success btn-sm"
-        data-testid="seller_order_details__button-dispatch-check"
-        onClick={ changeStatus }
-        disabled={ newStatus !== 'Preparando' }
-        value="Em Trânsito"
-      >
-        SAIU PARA ENTREGA
-      </button>
+        { newStatus }
+      </p>
+      <div className="container-fluid d-flex">
+        <button
+          type="button"
+          className="btn btn-warning btn-sm"
+          data-testid="seller_order_details__button-preparing-check"
+          onClick={ changeStatus }
+          disabled={ newStatus !== 'Pendente' }
+          value="Preparando"
+        >
+          PREPARAR PEDIDO
+        </button>
+        <button
+          type="button"
+          className="btn btn-success btn-sm"
+          data-testid="seller_order_details__button-dispatch-check"
+          onClick={ changeStatus }
+          disabled={ newStatus !== 'Preparando' }
+          value="Em Trânsito"
+        >
+          SAIU PARA ENTREGA
+        </button>
+      </div>
     </div>
   );
 }

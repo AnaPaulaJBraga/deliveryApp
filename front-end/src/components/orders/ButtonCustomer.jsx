@@ -23,7 +23,13 @@ function ButtonCustomer({ status, token }) {
   useEffect(() => { }, [newStatus]);
 
   return (
-    <div>
+    <div className="container">
+      <p
+        className="card text-primary text-center"
+        data-testid="customer_order_details__element-order-details-label-delivery-status"
+      >
+        { newStatus }
+      </p>
       <button
         type="button"
         className="btn btn-success btn-sm"

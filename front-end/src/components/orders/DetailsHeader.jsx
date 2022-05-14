@@ -53,14 +53,6 @@ function DetailsHeader({ data, role, token }) {
       >
         { date }
       </p>
-      <p
-        className="card text-primary text-center"
-        data-testid={
-          `${role}_order_details__element-order-details-label-delivery-status`
-        }
-      >
-        { status }
-      </p>
       <div>
         {
           (role === 'customer') ? (
