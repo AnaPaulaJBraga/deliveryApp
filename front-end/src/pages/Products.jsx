@@ -22,9 +22,7 @@ function Products() {
   }
 
   function callTotalPrice() {
-    console.log('total price from localStorage:', calculatePrice());
     setPrice(calculatePrice());
-    console.log('\n \n this is useEffect price:', finalPrice);
     setLoading(false);
   }
 
@@ -41,7 +39,6 @@ function Products() {
         />
       ));
     setProds(allProducts);
-    // setLoad(false);
     return allProducts;
   }
 
