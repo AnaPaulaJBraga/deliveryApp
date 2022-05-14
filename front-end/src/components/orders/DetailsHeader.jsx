@@ -9,7 +9,6 @@ function DetailsHeader({ data, role, token }) {
     id,
     sellerId,
     status,
-    deliveryNumber,
     saleDate,
   } = data;
   const [sellerName, setSellerName] = React.useState('');
@@ -85,7 +84,6 @@ DetailsHeader.propTypes = {
     id: PropTypes.number.isRequired,
     sellerId: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
-    deliveryNumber: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
   }).isRequired,
   role: PropTypes.string.isRequired,
