@@ -27,7 +27,7 @@ export default function NavBarButtons() {
             href="myUser"
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            { name || 'teste'}
+            { name }
           </a>
         </li>
 

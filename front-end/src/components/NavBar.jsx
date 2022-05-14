@@ -9,7 +9,7 @@ function NavBar({ pageName }) {
         <div className="container-fluid">
           <a
             className="navbar-brand"
-            href="myProduct"
+            href="products"
             data-testid="customer_products__element-navbar-link-products"
           >
             {pageName}
