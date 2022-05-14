@@ -42,7 +42,7 @@ function ButtonSeller({ status, token }) {
         data-testid="seller_order_details__button-dispatch-check"
         onClick={ changeStatus }
         disabled={ newStatus !== 'Preparando' }
-        value="Em trânsito"
+        value="Em Trânsito"
       >
         SAIU PARA ENTREGA
       </button>
