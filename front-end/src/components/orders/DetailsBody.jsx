@@ -14,7 +14,7 @@ function DetailsBody({ data, role }) {
         <p
           className="card text-primary text-center"
           data-testid={
-            `${role}_order_details__element-order-table-item-number-${item.id}`
+            `${role}_order_details__element-order-table-item-number-${count}`
           }
         >
           {count}
@@ -22,7 +22,7 @@ function DetailsBody({ data, role }) {
         <p
           className="card text-primary text-center"
           data-testid={
-            `${role}_order_details__element-order-table-name-${item.id}`
+            `${role}_order_details__element-order-table-name-${count}`
           }
         >
           {item.name}
@@ -30,7 +30,7 @@ function DetailsBody({ data, role }) {
         <p
           className="card text-primary text-center"
           data-testid={
-            `${role}_order_details__element-order-table-quantity-${item.id}`
+            `${role}_order_details__element-order-table-quantity-${count}`
           }
         >
           { item.salesProduct.quantity }
@@ -38,7 +38,7 @@ function DetailsBody({ data, role }) {
         <p
           className="card text-primary text-center"
           data-testid={
-            `${role}_order_details__element-order-table-unit-price-${item.id}`
+            `${role}_order_details__element-order-table-unit-price-${count}`
           }
         >
           {` R$ ${item.price}`}
@@ -46,7 +46,7 @@ function DetailsBody({ data, role }) {
         <p
           className="card text-primary text-center"
           data-testid={
-            `${role}_order_details__element-order-table-sub-total-${item.id}`
+            `${role}_order_details__element-order-table-sub-total-${count}`
           }
         >
           {`R$ ${(item.salesProduct.quantity * item.price).toFixed(2)}`}
