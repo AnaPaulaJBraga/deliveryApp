@@ -7,6 +7,8 @@ export default function NavBarButtons() {
   const handleLogout = () => {
     localStorage.clear();
   };
+  const { role } = JSON.parse(localStorage.getItem('user'));
+  const PATH = (role === 'seller') ? '/seller/orders' : '/customer/orders';
   return (
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -14,7 +16,7 @@ export default function NavBarButtons() {
           <a
             className="nav-link"
             aria-current="page"
-            href="/customer/orders"
+            href={ PATH }
             data-testid="customer_products__element-navbar-link-orders"
           >
             MEUS PEDIDOS
