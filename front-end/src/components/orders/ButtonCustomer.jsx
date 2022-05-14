@@ -23,13 +23,19 @@ function ButtonCustomer({ status, token }) {
   useEffect(() => { }, [newStatus]);
 
   return (
-    <div>
+    <div className="container">
+      <p
+        className="card text-primary text-center"
+        data-testid="customer_order_details__element-order-details-label-delivery-status"
+      >
+        { newStatus }
+      </p>
       <button
         type="button"
         className="btn btn-success btn-sm"
         data-testid="customer_order_details__button-delivery-check" // tem que trocar
         onClick={ changeStatus }
-        disabled={ newStatus !== 'Em trânsito' }
+        disabled={ newStatus !== 'Em Trânsito' }
         value="Entregue"
       >
         Confirmar recebimento
