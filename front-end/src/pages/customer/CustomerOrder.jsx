@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
+import Loading from '../../components/Loading';
 import OrderCard from '../../components/OrderCard';
-import dataMocked from '../../data/dataMocked';
-// import api from '../../services/api';
-// import PropTypes from 'prop-types';
+import api from '../../services/api';
 
 function CustomerOrder() {
+  const { id, token, role: roleStorage } = JSON.parse(localStorage.getItem('user'));
   const [customer, setCustomer] = useState([]);
-  // const role = 'customer';
-  const { role } = JSON.parse(localStorage.getItem('user'));
+  const [isLoading, setIsLoading] = useState(true);
+  const [role, setRole] = useState('');
 
   async function getCustomer() {
-    // const { token } = JSON.parse(localStorage.getItem('user'));
-    // const response = await api.get(`/customer/${id}`, {
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    // });
-    const response = {
-      data: [],
-    };
-
-    const data = dataMocked;
-    // data apenas para teste
-    setCustomer((response.data.length > 0) ? response.data : data);
+    const { data } = await api.get(`/customer/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    setRole(roleStorage);
+    setCustomer(data);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -32,7 +27,7 @@ function CustomerOrder() {
   return (
     <div>
       <NavBar pageName="Pedidos" />
-      {
+      { isLoading ? <Loading /> : (
         customer.map((order) => (
           <OrderCard
             key={ order.deliveryNumber }
@@ -41,14 +36,12 @@ function CustomerOrder() {
             status={ order.status }
             deliveryNumber={ order.deliveryNumber }
             totalPrice={ order.totalPrice }
-            salesDate={ order.salesDate }
+            saleDate={ order.saleDate }
           />
         ))
-      }
+      )}
     </div>
   );
 }
-
-// CustomerOrder.propTypes = {};
 
 export default CustomerOrder;

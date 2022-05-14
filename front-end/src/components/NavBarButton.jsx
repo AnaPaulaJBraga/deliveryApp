@@ -18,7 +18,7 @@ export default function NavBarButtons() {
           <a
             className="nav-link"
             aria-current="page"
-            href="/customer/checkout"
+            href="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
             MEUS PEDIDOS

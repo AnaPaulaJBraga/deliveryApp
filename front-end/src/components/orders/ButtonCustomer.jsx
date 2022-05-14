@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import api from '../../services/api';
 
-function ButtonCustomer({ status }) {
-  function changeStatus(e) {
-    // deve ser usado api para alterar status do pedido no BD
-    console.log(e.target.value);
-    // console.log(`Status alterado para ${e.target.value}`);
+function ButtonCustomer({ status, token }) {
+  const [newStatus, setNewStatus] = useState(status);
+  async function changeStatus(e) {
+    const id = Number(window.location.pathname.split('/')[3]);
+    const { value } = e.target;
+    await api.put('/statusupdate',
+      {
+        id,
+        status: value,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      });
+    setNewStatus(value);
   }
+
+  useEffect(() => { }, [newStatus]);
 
   return (
     <div>
@@ -15,7 +29,7 @@ function ButtonCustomer({ status }) {
         className="btn btn-success btn-sm"
         data-testid="customer_order_details__button-delivery-check" // tem que trocar
         onClick={ changeStatus }
-        disabled={ status !== 'Em trânsito' }
+        disabled={ newStatus !== 'Em trânsito' }
         value="Entregue"
       >
         Confirmar recebimento
@@ -26,6 +40,7 @@ function ButtonCustomer({ status }) {
 
 ButtonCustomer.propTypes = {
   status: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default ButtonCustomer;

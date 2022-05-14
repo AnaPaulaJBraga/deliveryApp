@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DetailsCard from '../../components/DetailsCard';
 import Navbar from '../../components/NavBar';
-import dataMocked from '../../data/dataMocked';
+import Loading from '../../components/Loading';
+import api from '../../services/api';
 
 function SalesDetails() {
-  // api get saledetails/:id(do produto)
+  const { token, role: roleStorage } = JSON.parse(localStorage.getItem('user'));
+  const [isLoading, setIsLoading] = useState(true);
   const [orderId] = useState(Number(window.location.pathname.split('/')[3]));
-  const [dataOrder] = useState(dataMocked.find((item) => item.id === orderId));
-  const [role] = useState('sales');
+  const [dataOrder, setDataOrder] = useState([]);
+  const [role, setRole] = useState('sales');
 
-  // async function getDetailsOrder() {
-  //   const findOrder = dataOrder.find(item => item.id === orderId);
-  //   console.log('findOrder:', findOrder);
-  //   setOrder(findOrder);
-  //   // setDataOrder(data);
-  // }
+  async function getDataOrder() {
+    const { data } = await api.get(`/saledetails/${orderId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    setRole(roleStorage);
+    setDataOrder(data);
+    setIsLoading(false);
+  }
 
-  // useEffect(() => {
-  //   getDetailsOrder();
-  // }, []);
+  useEffect(() => {
+    getDataOrder();
+  }, []);
 
   return (
     <div>
       <Navbar pageName="Pedidos" />
-      <DetailsCard data={ dataOrder } role={ role } />
+      { isLoading ? <Loading /> : (
+        <DetailsCard data={ dataOrder } role={ role } token={ token } />)}
     </div>
   );
 }
