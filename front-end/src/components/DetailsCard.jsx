@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DetailsHeader from './orders/DetailsHeader';
 import DetailsBody from './orders/DetailsBody';
+import moneyToString from '../utilities/moneyStringConvert';
 
 function DetailsCard({ data, role, token }) {
   const { totalPrice } = data;
+  const price = moneyToString(totalPrice);
 
   return (
     <div>
@@ -23,7 +25,7 @@ function DetailsCard({ data, role, token }) {
           className="text-end"
           data-testid={ `${role}_order_details__element-order-total-price` }
         >
-          { `R$ ${totalPrice}` }
+          { price }
         </div>
       </div>
     </div>
