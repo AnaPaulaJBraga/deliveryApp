@@ -21,6 +21,13 @@ function Login() {
     }
   }, [email, password]);
 
+  useEffect(() => {
+    const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+    if (userLocalStorage) {
+      navigate('/customer/products');
+    }
+  }, []);
+
   async function onSubmit(event) {
     event.preventDefault();
     try {

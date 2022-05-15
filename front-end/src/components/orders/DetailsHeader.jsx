@@ -12,7 +12,7 @@ function DetailsHeader({ data, role, token }) {
     saleDate,
   } = data;
   const [sellerName, setSellerName] = React.useState('');
-  const date = new Date(Date.parse(saleDate)).toLocaleDateString();
+  const date = new Date(Date.parse(saleDate)).toLocaleDateString('pt-br');
 
   async function getCustomer() {
     const { data: { name } } = await api.get(`/seller/${sellerId}`, {
