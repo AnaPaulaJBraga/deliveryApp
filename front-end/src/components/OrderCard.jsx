@@ -6,7 +6,7 @@ function OrderCard(props) {
   const {
     id, role, status,
     totalPrice, saleDate } = props;
-  const date = new Date(Date.parse(saleDate)).toLocaleDateString();
+  const date = new Date(Date.parse(saleDate)).toLocaleDateString('pt-br');
 
   const PATH = (role === 'seller') ? '/seller/orders' : '/customer/orders';
 
